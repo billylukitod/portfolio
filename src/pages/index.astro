@@ -49,16 +49,16 @@ const focusAreas = [
     <Container>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div class="flex flex-col gap-6">
-          <p class="text-[var(--color-accent)] font-mono text-sm tracking-wide uppercase font-semibold">
+          <p class="animate-hero-eyebrow text-[var(--color-accent)] font-mono text-sm tracking-wide uppercase font-semibold">
             {site.eyebrow}
           </p>
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-[var(--color-text-primary)]">
+          <h1 class="animate-hero-heading font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-[var(--color-text-primary)]">
             {site.headline}
           </h1>
-          <p class="text-xl text-[var(--color-text-secondary)] max-w-2xl leading-relaxed">
+          <p class="animate-hero-summary text-xl text-[var(--color-text-secondary)] max-w-2xl leading-relaxed">
             {site.summary}
           </p>
-          <div class="flex flex-wrap gap-4 mt-2">
+          <div class="animate-hero-cta flex flex-wrap gap-4 mt-2">
             <ButtonLink href={site.heroCtaPrimary.href} variant="primary">
               {site.heroCtaPrimary.label}
               <IconArrowRight size={16} class="ml-2 inline" />
@@ -67,12 +67,12 @@ const focusAreas = [
               {site.heroCtaSecondary.label}
             </ButtonLink>
           </div>
-          <div class="mt-2 flex items-center gap-4">
+          <div class="animate-hero-social mt-2 flex items-center gap-4">
             <span class="text-[var(--color-text-muted)] text-sm font-medium">Connect:</span>
             <SocialLinks />
           </div>
         </div>
-        <div class="rounded-[var(--radius-xl)] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface-elevated)]">
+        <div class="animate-hero-image rounded-[var(--radius-xl)] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface-elevated)]">
           <img
             src="/media/projects/ackermann-adaptive-cruise-control/cover.svg"
             alt="Autonomous system engineering visualization"
@@ -89,10 +89,12 @@ const focusAreas = [
   <!-- 2. Engineering Focus -->
   <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)] bg-[var(--color-surface)]">
     <Container>
-      <SectionHeading title="Engineering Focus" align="center" />
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+      <div class="animate-on-scroll">
+        <SectionHeading title="Engineering Focus" align="center" />
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 stagger-children">
         {focusAreas.map((area) => (
-          <div class="rounded-[var(--radius-lg)] p-8 border border-[var(--color-border)] bg-[var(--color-bg)] border-t-4 border-t-[var(--color-accent)]">
+          <div class="hover-lift rounded-[var(--radius-lg)] p-8 border border-[var(--color-border)] bg-[var(--color-bg)] border-t-4 border-t-[var(--color-accent)]">
             <span class="text-3xl mb-4 block" aria-hidden="true">{area.icon}</span>
             <h3 class="text-xl font-bold text-[var(--color-text-primary)] mb-3">{area.title}</h3>
             <p class="text-[var(--color-text-secondary)] leading-relaxed">{area.description}</p>
@@ -105,29 +107,31 @@ const focusAreas = [
   <!-- 3. Featured Projects -->
   <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
     <Container>
-      <div class="flex justify-between items-end mb-10">
+      <div class="animate-on-scroll flex justify-between items-end mb-10">
         <SectionHeading title="Featured Projects" />
         <a
           href="/projects"
-          class="text-[var(--color-accent)] font-medium hover:underline hidden sm:flex items-center gap-1 group no-underline"
+          class="accent-underline text-[var(--color-accent)] font-medium hidden sm:flex items-center gap-1 group"
         >
           All Projects
           <IconArrowRight size={16} class="group-hover:translate-x-1 transition-transform" />
         </a>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
         {featuredProjects.map((project) => (
-          <ProjectCard
-            title={project.data.title}
-            slug={project.id}
-            summary={project.data.summary}
-            year={project.data.year}
-            role={project.data.role}
-            coverImage={project.data.coverImage}
-            coverAlt={project.data.coverAlt}
-            technologies={project.data.technologies}
-            featured={project.data.featured}
-          />
+          <div class="hover-lift">
+            <ProjectCard
+              title={project.data.title}
+              slug={project.id}
+              summary={project.data.summary}
+              year={project.data.year}
+              role={project.data.role}
+              coverImage={project.data.coverImage}
+              coverAlt={project.data.coverAlt}
+              technologies={project.data.technologies}
+              featured={project.data.featured}
+            />
+          </div>
         ))}
       </div>
       <div class="mt-8 text-center sm:hidden">
@@ -140,7 +144,7 @@ const focusAreas = [
   <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)] bg-[var(--color-surface)]">
     <Container>
       <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-        <div class="md:col-span-4">
+        <div class="md:col-span-4 animate-on-scroll">
           <div class="rounded-[var(--radius-xl)] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface-elevated)]">
             <img
               src="/media/profile/photo.svg"
@@ -152,7 +156,7 @@ const focusAreas = [
             />
           </div>
         </div>
-        <div class="md:col-span-8 flex flex-col gap-6">
+        <div class="md:col-span-8 flex flex-col gap-6 animate-on-scroll">
           <SectionHeading title="About Me" />
           <div class="text-[var(--color-text-secondary)] text-lg space-y-4 leading-relaxed">
             {site.aboutBio.map((paragraph) => (
@@ -173,12 +177,14 @@ const focusAreas = [
   <!-- 5. Experience Preview -->
   <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
     <Container>
-      <SectionHeading title="Experience" />
+      <div class="animate-on-scroll">
+        <SectionHeading title="Experience" />
+      </div>
       <div class="mt-10 max-w-3xl">
-        <div class="relative border-l-2 border-[var(--color-border)] ml-3 md:ml-4 space-y-10">
-          {experiences.slice(0, 3).map((exp) => (
+        <div class="relative border-l-2 border-[var(--color-border)] ml-3 md:ml-4 space-y-10 stagger-children">
+          {experiences.slice(0, 3).map((exp, i) => (
             <div class="relative pl-8 md:pl-10">
-              <div class="absolute w-3 h-3 bg-[var(--color-accent)] rounded-full -left-[7px] top-2 ring-4 ring-[var(--color-bg)]" />
+              <div class={`absolute w-3 h-3 bg-[var(--color-accent)] rounded-full -left-[7px] top-2 ring-4 ring-[var(--color-bg)] ${i === 0 ? 'pulse-dot' : ''}`} />
               <div class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-4 mb-1">
                 <h3 class="text-lg font-bold text-[var(--color-text-primary)]">{exp.role}</h3>
                 <span class="text-xs font-medium text-[var(--color-accent)] font-mono">
@@ -197,26 +203,28 @@ const focusAreas = [
   <!-- 6. Latest Notes -->
   <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)] bg-[var(--color-surface)]">
     <Container>
-      <div class="flex justify-between items-end mb-10">
+      <div class="animate-on-scroll flex justify-between items-end mb-10">
         <SectionHeading title="Latest Notes" />
         <a
           href="/notes"
-          class="text-[var(--color-accent)] font-medium hover:underline hidden sm:flex items-center gap-1 group no-underline"
+          class="accent-underline text-[var(--color-accent)] font-medium hidden sm:flex items-center gap-1 group"
         >
           All Notes
           <IconArrowRight size={16} class="group-hover:translate-x-1 transition-transform" />
         </a>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
         {latestNotes.map((note) => (
-          <NoteCard
-            title={note.data.title}
-            slug={note.id}
-            summary={note.data.summary}
-            publishedAt={note.data.publishedAt}
-            tags={note.data.tags}
-            readingTime={getReadingTime(note.body ?? '')}
-          />
+          <div class="hover-lift">
+            <NoteCard
+              title={note.data.title}
+              slug={note.id}
+              summary={note.data.summary}
+              publishedAt={note.data.publishedAt}
+              tags={note.data.tags}
+              readingTime={getReadingTime(note.body ?? '')}
+            />
+          </div>
         ))}
       </div>
     </Container>
@@ -225,8 +233,8 @@ const focusAreas = [
   <!-- 7. Contact CTA -->
   <section class="py-[var(--spacing-section)] bg-[var(--color-bg)] text-center">
     <Container>
-      <div class="max-w-2xl mx-auto flex flex-col items-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-6">
+      <div class="animate-on-scroll max-w-2xl mx-auto flex flex-col items-center">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-6">
           {site.contactCta.heading}
         </h2>
         <p class="text-lg text-[var(--color-text-secondary)] mb-10 leading-relaxed">
@@ -246,3 +254,4 @@ const focusAreas = [
     </Container>
   </section>
 </BaseLayout>
+

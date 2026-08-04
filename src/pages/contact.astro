@@ -14,11 +14,11 @@ import { site } from '../data/site';
   <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
     <Container>
       <div class="max-w-2xl mx-auto">
-        <h1 class="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-6 text-center">
+        <h1 class="animate-hero-heading font-display text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-6 text-center">
           Get in Touch
         </h1>
 
-        <div class="text-center mb-12">
+        <div class="text-center mb-12 animate-hero-summary">
           <p class="text-lg text-[var(--color-text-secondary)] leading-relaxed mb-4">
             {site.availability}
           </p>
@@ -28,10 +28,10 @@ import { site } from '../data/site';
           </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12 stagger-children">
           <a
             href={`mailto:${site.email}`}
-            class="flex items-center gap-3 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors no-underline"
+            class="hover-lift flex items-center gap-3 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors no-underline"
           >
             <div class="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--color-accent-light)] flex items-center justify-center">
               <IconMail size={20} class="text-[var(--color-accent)]" />
@@ -46,7 +46,7 @@ import { site } from '../data/site';
             href={site.social.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center gap-3 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors no-underline"
+            class="hover-lift flex items-center gap-3 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors no-underline"
           >
             <div class="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--color-accent-light)] flex items-center justify-center">
               <IconLinkedin size={20} class="text-[var(--color-accent)]" />
@@ -61,7 +61,7 @@ import { site } from '../data/site';
             href={site.social.github}
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center gap-3 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors no-underline"
+            class="hover-lift flex items-center gap-3 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors no-underline"
           >
             <div class="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--color-accent-light)] flex items-center justify-center">
               <IconGithub size={20} class="text-[var(--color-accent)]" />
@@ -75,7 +75,7 @@ import { site } from '../data/site';
           <a
             href={site.cvPath}
             download
-            class="flex items-center gap-3 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors no-underline"
+            class="hover-lift flex items-center gap-3 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors no-underline"
           >
             <div class="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--color-accent-light)] flex items-center justify-center">
               <IconDownload size={20} class="text-[var(--color-accent)]" />
@@ -87,7 +87,7 @@ import { site } from '../data/site';
           </a>
         </div>
 
-        <div class="text-center p-8 rounded-[var(--radius-lg)] bg-[var(--color-surface)] border border-[var(--color-border)]">
+        <div class="animate-on-scroll text-center p-8 rounded-[var(--radius-lg)] bg-[var(--color-surface)] border border-[var(--color-border)]">
           <h2 class="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
             {site.contactCta.heading}
           </h2>

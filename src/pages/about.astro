@@ -15,7 +15,7 @@ import { achievements, education } from '../data/achievements';
   <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)] bg-[var(--color-surface)]">
     <Container>
       <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-        <div class="md:col-span-4 flex flex-col items-center">
+        <div class="md:col-span-4 flex flex-col items-center animate-hero-image">
           <div class="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-[var(--color-border)] bg-[var(--color-surface-elevated)]">
             <img
               src="/media/profile/photo.svg"
@@ -26,30 +26,30 @@ import { achievements, education } from '../data/achievements';
               loading="eager"
             />
           </div>
-          <div class="mt-8 flex flex-col gap-3 w-full max-w-xs">
+          <div class="mt-8 flex flex-col gap-3 w-full max-w-xs animate-hero-cta">
             <ButtonLink href="/projects" variant="primary" class="justify-center">View Projects</ButtonLink>
             <ButtonLink href="/contact" variant="secondary" class="justify-center">Get in Touch</ButtonLink>
           </div>
         </div>
 
         <div class="md:col-span-8 space-y-8">
-          <div>
-            <h1 class="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-2">About Me</h1>
+          <div class="animate-hero-eyebrow">
+            <h1 class="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-2 font-display">About Me</h1>
             <p class="text-[var(--color-accent)] font-medium">{site.title}</p>
           </div>
 
-          <div class="space-y-4 text-[var(--color-text-secondary)] leading-relaxed text-lg">
+          <div class="animate-hero-summary space-y-4 text-[var(--color-text-secondary)] leading-relaxed text-lg">
             {site.aboutBio.map((paragraph) => (
               <p>{paragraph}</p>
             ))}
           </div>
 
-          <div>
+          <div class="animate-on-scroll">
             <h2 class="text-xl font-semibold text-[var(--color-text-primary)] mb-3">Engineering Philosophy</h2>
             <p class="text-[var(--color-text-secondary)] leading-relaxed">{site.aboutPhilosophy}</p>
           </div>
 
-          <div>
+          <div class="animate-on-scroll">
             <h2 class="text-xl font-semibold text-[var(--color-text-primary)] mb-3">Current Interests</h2>
             <p class="text-[var(--color-text-secondary)] leading-relaxed">{site.aboutInterests}</p>
           </div>
@@ -61,10 +61,12 @@ import { achievements, education } from '../data/achievements';
   <!-- Experience -->
   <section id="experience" class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
     <Container>
-      <SectionHeading title="Experience" />
-      <div class="mt-10 max-w-3xl space-y-8">
+      <div class="animate-on-scroll">
+        <SectionHeading title="Experience" />
+      </div>
+      <div class="mt-10 max-w-3xl space-y-8 stagger-children">
         {experiences.map((exp) => (
-          <div class="flex flex-col md:flex-row gap-4 md:gap-8 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)]">
+          <div class="hover-lift flex flex-col md:flex-row gap-4 md:gap-8 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)]">
             <div class="md:w-1/4 shrink-0">
               <p class="text-sm text-[var(--color-text-muted)] font-mono">{exp.period}</p>
             </div>
@@ -83,11 +85,11 @@ import { achievements, education } from '../data/achievements';
   <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)] bg-[var(--color-surface)]">
     <Container>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div>
+        <div class="animate-on-scroll">
           <SectionHeading title="Education" />
           <div class="mt-8 space-y-6">
             {education.map((edu) => (
-              <div class="p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg)]">
+              <div class="hover-lift p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg)]">
                 <h3 class="text-lg font-bold text-[var(--color-text-primary)]">{edu.degree}</h3>
                 <p class="text-[var(--color-accent)] font-medium">{edu.institution}</p>
                 <p class="text-sm text-[var(--color-text-muted)] font-mono mt-1">{edu.period}</p>
@@ -99,11 +101,11 @@ import { achievements, education } from '../data/achievements';
           </div>
         </div>
 
-        <div>
+        <div class="animate-on-scroll">
           <SectionHeading title="Achievements" />
           <div class="mt-8 space-y-6">
             {achievements.map((achievement) => (
-              <div class="p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg)]">
+              <div class="hover-lift p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg)]">
                 <h3 class="text-lg font-bold text-[var(--color-text-primary)]">{achievement.title}</h3>
                 {achievement.event && (
                   <p class="text-[var(--color-accent)] font-medium">{achievement.event}</p>
@@ -121,10 +123,12 @@ import { achievements, education } from '../data/achievements';
   <!-- Skills -->
   <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
     <Container>
-      <SectionHeading title="Skills & Tools" />
-      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="animate-on-scroll">
+        <SectionHeading title="Skills & Tools" />
+      </div>
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
         {skillGroups.map((group) => (
-          <div class="p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)]">
+          <div class="hover-lift p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)]">
             <h3 class="text-lg font-semibold text-[var(--color-text-primary)] mb-4">{group.category}</h3>
             <TechnologyTags technologies={group.skills} />
           </div>
@@ -136,8 +140,8 @@ import { achievements, education } from '../data/achievements';
   <!-- CTA -->
   <section class="py-[var(--spacing-section)] bg-[var(--color-surface)] text-center">
     <Container>
-      <div class="max-w-xl mx-auto">
-        <h2 class="text-2xl font-bold text-[var(--color-text-primary)] mb-4">Want to work together?</h2>
+      <div class="animate-on-scroll max-w-xl mx-auto">
+        <h2 class="font-display text-2xl font-bold text-[var(--color-text-primary)] mb-4">Want to work together?</h2>
         <p class="text-[var(--color-text-secondary)] mb-8">
           Check out my projects or get in touch to discuss engineering roles, research, and collaboration.
         </p>

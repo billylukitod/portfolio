@@ -11,26 +11,28 @@ const sortedProjects = projects.sort((a, b) => (a.data.order ?? 99) - (b.data.or
 <BaseLayout title="Projects" description="Engineering projects spanning robotics, embedded systems, UAV, and control systems.">
   <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
     <Container>
-      <div class="mb-12">
-        <h1 class="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-4">Projects</h1>
-        <p class="text-xl text-[var(--color-text-secondary)] max-w-2xl">
+      <div class="mb-12 animate-hero-heading">
+        <h1 class="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-4 font-display">Projects</h1>
+        <p class="text-xl text-[var(--color-text-secondary)] max-w-2xl animate-hero-summary">
           Selected work spanning robotics, embedded systems, electronics, and control systems.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
         {sortedProjects.map((project) => (
-          <ProjectCard
-            title={project.data.title}
-            slug={project.id}
-            summary={project.data.summary}
-            year={project.data.year}
-            role={project.data.role}
-            coverImage={project.data.coverImage}
-            coverAlt={project.data.coverAlt}
-            technologies={project.data.technologies}
-            featured={project.data.featured}
-          />
+          <div class="hover-lift">
+            <ProjectCard
+              title={project.data.title}
+              slug={project.id}
+              summary={project.data.summary}
+              year={project.data.year}
+              role={project.data.role}
+              coverImage={project.data.coverImage}
+              coverAlt={project.data.coverAlt}
+              technologies={project.data.technologies}
+              featured={project.data.featured}
+            />
+          </div>
         ))}
       </div>
     </Container>

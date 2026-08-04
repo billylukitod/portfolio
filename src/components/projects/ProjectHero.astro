@@ -21,14 +21,14 @@ const { title, summary, coverImage, coverAlt, hasDummyData = false } = Astro.pro
         </div>
       )}
 
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-text-primary)] leading-tight mb-4">
+      <h1 class="animate-hero-heading font-display text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-text-primary)] leading-tight mb-4">
         {title}
       </h1>
-      <p class="text-lg md:text-xl text-[var(--color-text-secondary)] max-w-[var(--width-content)] mb-8">
+      <p class="animate-hero-summary text-lg md:text-xl text-[var(--color-text-secondary)] max-w-[var(--width-content)] mb-8">
         {summary}
       </p>
 
-      <div class="rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface-elevated)]">
+      <div class="animate-hero-image rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface-elevated)]">
         <img
           src={coverImage}
           alt={coverAlt}

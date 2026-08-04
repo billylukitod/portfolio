@@ -210,6 +210,148 @@
   all: revert;
 }
 
+/* ==============================================
+   Display Font
+   ============================================== */
+.font-display {
+  font-family: 'Space Grotesk', var(--font-sans);
+}
+
+/* ==============================================
+   Animations
+   ============================================== */
+
+/* Keyframes */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Hero entrance — plays immediately on load */
+.animate-hero-eyebrow {
+  animation: fade-in-up 0.6s ease-out 0.1s both;
+}
+.animate-hero-heading {
+  animation: fade-in-up 0.7s ease-out 0.25s both;
+}
+.animate-hero-summary {
+  animation: fade-in-up 0.6s ease-out 0.45s both;
+}
+.animate-hero-cta {
+  animation: fade-in-up 0.6s ease-out 0.6s both;
+}
+.animate-hero-social {
+  animation: fade-in-up 0.5s ease-out 0.75s both;
+}
+.animate-hero-image {
+  animation: scale-in 0.8s ease-out 0.3s both;
+}
+
+/* Scroll-triggered — hidden until IntersectionObserver adds .is-visible */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children — apply to parent, children get delay */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.stagger-children.is-visible > *:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translateY(0); }
+.stagger-children.is-visible > *:nth-child(2) { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
+.stagger-children.is-visible > *:nth-child(3) { transition-delay: 0.25s; opacity: 1; transform: translateY(0); }
+.stagger-children.is-visible > *:nth-child(4) { transition-delay: 0.35s; opacity: 1; transform: translateY(0); }
+.stagger-children.is-visible > *:nth-child(5) { transition-delay: 0.45s; opacity: 1; transform: translateY(0); }
+.stagger-children.is-visible > *:nth-child(6) { transition-delay: 0.55s; opacity: 1; transform: translateY(0); }
+
+/* Card hover lift */
+.hover-lift {
+  transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Accent underline effect for links */
+.accent-underline {
+  position: relative;
+  text-decoration: none;
+}
+.accent-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  transition: width 0.3s ease-out;
+}
+.accent-underline:hover::after {
+  width: 100%;
+}
+
+/* Subtle glow pulse on the accent dot in timeline */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(13, 148, 136, 0); }
+}
+.pulse-dot {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -219,4 +361,11 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  .animate-on-scroll,
+  .stagger-children > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
+

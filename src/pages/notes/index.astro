@@ -13,29 +13,31 @@ const sortedNotes = notes.sort((a, b) => b.data.publishedAt.getTime() - a.data.p
   <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
     <Container>
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
-        <div>
-          <h1 class="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-4">Technical Notes</h1>
-          <p class="text-xl text-[var(--color-text-secondary)] max-w-2xl">
+        <div class="animate-hero-heading">
+          <h1 class="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-4 font-display">Technical Notes</h1>
+          <p class="text-xl text-[var(--color-text-secondary)] max-w-2xl animate-hero-summary">
             Thoughts and tutorials on robotics, embedded systems, and engineering.
           </p>
         </div>
-        <a href="/rss.xml" class="text-[var(--color-accent)] hover:underline flex items-center gap-2 text-sm font-medium no-underline">
+        <a href="/rss.xml" class="accent-underline text-[var(--color-accent)] flex items-center gap-2 text-sm font-medium animate-hero-cta">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
           RSS Feed
         </a>
       </div>
 
       {sortedNotes.length > 0 ? (
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
           {sortedNotes.map((note) => (
-            <NoteCard
-              title={note.data.title}
-              slug={note.id}
-              summary={note.data.summary}
-              publishedAt={note.data.publishedAt}
-              tags={note.data.tags}
-              readingTime={getReadingTime(note.body ?? '')}
-            />
+            <div class="hover-lift">
+              <NoteCard
+                title={note.data.title}
+                slug={note.id}
+                summary={note.data.summary}
+                publishedAt={note.data.publishedAt}
+                tags={note.data.tags}
+                readingTime={getReadingTime(note.body ?? '')}
+              />
+            </div>
           ))}
         </div>
       ) : (

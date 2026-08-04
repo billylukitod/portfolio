@@ -85,7 +85,7 @@ const jsonLd = {
       <Container>
         <div class="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 lg:gap-12">
           <!-- Main content -->
-          <div class="prose-custom min-w-0">
+          <div class="animate-on-scroll prose-custom min-w-0">
             <slot />
 
             {gallery && gallery.length > 0 && (
@@ -108,7 +108,7 @@ const jsonLd = {
           </div>
 
           <!-- Sidebar -->
-          <aside class="lg:order-last">
+          <aside class="lg:order-last animate-on-scroll">
             <div class="sticky top-24 space-y-6">
               <ProjectMeta
                 role={role}
