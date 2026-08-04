@@ -1,0 +1,75 @@
+---
+import Container from '../common/Container.astro';
+import IconArrowLeft from '../icons/IconArrowLeft.astro';
+import IconArrowRight from '../icons/IconArrowRight.astro';
+
+interface ProjectLink {
+  slug: string;
+  title: string;
+}
+
+interface Props {
+  prev?: ProjectLink | null;
+  next?: ProjectLink | null;
+}
+
+const { prev = null, next = null } = Astro.props;
+
+const hasPrev = prev !== null;
+const hasNext = next !== null;
+---
+
+{
+  (hasPrev || hasNext) && (
+    <nav
+      class="border-t border-[var(--color-border)] bg-[var(--color-surface)]"
+      aria-label="Project navigation"
+    >
+      <Container>
+        <div class="py-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {hasPrev ? (
+            <a
+              href={`/projects/${prev!.slug}`}
+              class="group flex items-center gap-3 p-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors no-underline"
+            >
+              <IconArrowLeft
+                size={20}
+                class="text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)] transition-colors flex-shrink-0"
+              />
+              <div class="min-w-0">
+                <span class="text-xs text-[var(--color-text-muted)] uppercase tracking-wider">
+                  Previous
+                </span>
+                <p class="text-sm font-medium text-[var(--color-text-primary)] truncate">
+                  {prev!.title}
+                </p>
+              </div>
+            </a>
+          ) : (
+            <div />
+          )}
+
+          {hasNext && (
+            <a
+              href={`/projects/${next!.slug}`}
+              class="group flex items-center justify-end gap-3 p-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors no-underline sm:text-right"
+            >
+              <div class="min-w-0">
+                <span class="text-xs text-[var(--color-text-muted)] uppercase tracking-wider">
+                  Next
+                </span>
+                <p class="text-sm font-medium text-[var(--color-text-primary)] truncate">
+                  {next!.title}
+                </p>
+              </div>
+              <IconArrowRight
+                size={20}
+                class="text-[var(--color-text-muted)] group-hover:text-[var(--color-accent)] transition-colors flex-shrink-0"
+              />
+            </a>
+          )}
+        </div>
+      </Container>
+    </nav>
+  )
+}

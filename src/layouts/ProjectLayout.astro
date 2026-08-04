@@ -1,0 +1,135 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Container from '../components/common/Container.astro';
+import ProjectHero from '../components/projects/ProjectHero.astro';
+import ProjectMeta from '../components/projects/ProjectMeta.astro';
+import TechnologyTags from '../components/projects/TechnologyTags.astro';
+import ProjectGallery from '../components/projects/ProjectGallery.astro';
+import VideoEmbed from '../components/projects/VideoEmbed.astro';
+import ProjectNavigation from '../components/projects/ProjectNavigation.astro';
+
+interface GalleryItem {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  title: string;
+  summary: string;
+  coverImage: string;
+  coverAlt: string;
+  heroImage?: string;
+  heroAlt?: string;
+  role: string;
+  period?: string;
+  year: string;
+  status: string;
+  categories: string[];
+  technologies: string[];
+  repositoryUrl?: string;
+  liveUrl?: string;
+  videoUrl?: string;
+  videoPoster?: string;
+  gallery?: GalleryItem[];
+  hasDummyData?: boolean;
+  seoDescription?: string;
+  prevProject?: { slug: string; title: string } | null;
+  nextProject?: { slug: string; title: string } | null;
+}
+
+const {
+  title,
+  summary,
+  coverImage,
+  coverAlt,
+  heroImage,
+  heroAlt,
+  role,
+  period,
+  year,
+  status,
+  categories,
+  technologies,
+  repositoryUrl,
+  liveUrl,
+  videoUrl,
+  videoPoster,
+  gallery,
+  hasDummyData = false,
+  seoDescription,
+  prevProject = null,
+  nextProject = null,
+} = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: title,
+  description: seoDescription || summary,
+  keywords: technologies.join(', '),
+};
+---
+
+<BaseLayout title={title} description={seoDescription || summary} jsonLd={jsonLd}>
+  <article>
+    <ProjectHero
+      title={title}
+      summary={summary}
+      coverImage={heroImage || coverImage}
+      coverAlt={heroAlt || coverAlt}
+      hasDummyData={hasDummyData}
+    />
+
+    <div class="py-8 md:py-12">
+      <Container>
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 lg:gap-12">
+          <!-- Main content -->
+          <div class="prose-custom min-w-0">
+            <slot />
+
+            {gallery && gallery.length > 0 && (
+              <section class="mt-12 not-prose">
+                <h2 class="text-xl font-semibold text-[var(--color-text-primary)] mb-6">
+                  Gallery
+                </h2>
+                <ProjectGallery images={gallery} />
+              </section>
+            )}
+
+            {videoUrl && (
+              <section class="mt-12 not-prose">
+                <h2 class="text-xl font-semibold text-[var(--color-text-primary)] mb-6">
+                  Video Demo
+                </h2>
+                <VideoEmbed url={videoUrl} poster={videoPoster} title={`${title} demo`} />
+              </section>
+            )}
+          </div>
+
+          <!-- Sidebar -->
+          <aside class="lg:order-last">
+            <div class="sticky top-24 space-y-6">
+              <ProjectMeta
+                role={role}
+                period={period || year}
+                status={status}
+                categories={categories}
+                repositoryUrl={repositoryUrl}
+                liveUrl={liveUrl}
+              />
+              <div>
+                <h3 class="text-sm font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider mb-3">
+                  Technologies
+                </h3>
+                <TechnologyTags technologies={technologies} />
+              </div>
+            </div>
+          </aside>
+        </div>
+      </Container>
+    </div>
+
+    <ProjectNavigation prev={prevProject} next={nextProject} />
+  </article>
+</BaseLayout>

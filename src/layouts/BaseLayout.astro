@@ -1,0 +1,95 @@
+---
+import { site } from '../data/site';
+import SeoHead from '../components/common/SeoHead.astro';
+import SkipLink from '../components/common/SkipLink.astro';
+import SiteHeader from '../components/navigation/SiteHeader.astro';
+import SiteFooter from '../components/common/SiteFooter.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalUrl?: string;
+  type?: 'website' | 'article';
+  publishedAt?: Date;
+  updatedAt?: Date;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>;
+}
+
+const {
+  title,
+  description,
+  image,
+  canonicalUrl,
+  type = 'website',
+  publishedAt,
+  updatedAt,
+  noindex = false,
+  jsonLd,
+} = Astro.props;
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: site.title,
+  description: site.description,
+  url: site.siteUrl,
+  sameAs: [site.social.github, site.social.linkedin].filter(Boolean),
+};
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${site.name} — Notes`}
+      href="/rss.xml"
+    />
+    <SeoHead
+      title={title}
+      description={description}
+      image={image}
+      canonicalUrl={canonicalUrl}
+      type={type}
+      publishedAt={publishedAt}
+      updatedAt={updatedAt}
+      noindex={noindex}
+      jsonLd={jsonLd}
+    />
+    {!jsonLd && (
+      <script
+        is:inline
+        type="application/ld+json"
+        set:html={JSON.stringify(personJsonLd)}
+      />
+    )}
+    <!-- Theme initialization to prevent flash -->
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem('theme');
+        const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const theme = stored || preferred;
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body
+    class="min-h-screen flex flex-col bg-[var(--color-bg)] text-[var(--color-text-primary)] font-[var(--font-sans)] antialiased transition-colors duration-200"
+  >
+    <SkipLink />
+    <SiteHeader />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

@@ -1,0 +1,43 @@
+---
+import Container from '../common/Container.astro';
+
+interface Props {
+  title: string;
+  summary: string;
+  coverImage: string;
+  coverAlt: string;
+  hasDummyData?: boolean;
+}
+
+const { title, summary, coverImage, coverAlt, hasDummyData = false } = Astro.props;
+---
+
+<section class="bg-[var(--color-surface)] border-b border-[var(--color-border)]">
+  <Container>
+    <div class="py-8 md:py-12 lg:py-16">
+      {hasDummyData && import.meta.env.DEV && (
+        <div class="mb-4 inline-flex items-center gap-2 px-3 py-1 text-xs font-medium text-amber-700 bg-amber-50 rounded-full border border-amber-200 dark:text-amber-300 dark:bg-amber-950 dark:border-amber-800">
+          <span>⚠</span> Draft data — some values need verification
+        </div>
+      )}
+
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-text-primary)] leading-tight mb-4">
+        {title}
+      </h1>
+      <p class="text-lg md:text-xl text-[var(--color-text-secondary)] max-w-[var(--width-content)] mb-8">
+        {summary}
+      </p>
+
+      <div class="rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface-elevated)]">
+        <img
+          src={coverImage}
+          alt={coverAlt}
+          width="1200"
+          height="675"
+          class="w-full h-auto object-cover"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </Container>
+</section>

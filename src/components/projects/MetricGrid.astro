@@ -1,0 +1,27 @@
+---
+interface Props {
+  metrics: {
+    label: string;
+    value: string;
+    unit?: string;
+  }[];
+}
+
+const { metrics } = Astro.props;
+---
+
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 not-prose">
+  {
+    metrics.map((metric) => (
+      <div class="p-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] text-center">
+        <div class="text-2xl font-bold text-[var(--color-accent)]">
+          {metric.value}
+          {metric.unit && (
+            <span class="text-sm font-normal text-[var(--color-text-muted)]">{metric.unit}</span>
+          )}
+        </div>
+        <div class="text-xs text-[var(--color-text-muted)] mt-1">{metric.label}</div>
+      </div>
+    ))
+  }
+</div>

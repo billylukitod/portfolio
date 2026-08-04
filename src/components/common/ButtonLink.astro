@@ -1,0 +1,44 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  external?: boolean;
+  class?: string;
+  download?: boolean;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  external = false,
+  class: className = '',
+  download: isDownload = false,
+} = Astro.props;
+
+const baseStyles = 'inline-flex items-center justify-center rounded-[var(--radius-md)] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] focus-visible:ring-offset-2 no-underline';
+
+const variants: Record<string, string> = {
+  primary: 'bg-[var(--color-accent)] text-[var(--color-accent-contrast)] hover:bg-[var(--color-accent-hover)]',
+  secondary: 'border border-[var(--color-border)] bg-[var(--color-surface)] hover:bg-[var(--color-surface-elevated)] text-[var(--color-text-primary)]',
+  ghost: 'hover:bg-[var(--color-surface-elevated)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]',
+};
+
+const sizes: Record<string, string> = {
+  sm: 'h-9 px-3 text-sm',
+  md: 'h-10 px-4 py-2 text-sm',
+  lg: 'h-11 px-6 text-base',
+};
+
+const externalAttrs = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+<a
+  href={href}
+  class:list={[baseStyles, variants[variant], sizes[size], className]}
+  download={isDownload || undefined}
+  {...externalAttrs}
+>
+  <slot />
+</a>

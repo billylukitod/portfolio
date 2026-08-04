@@ -1,0 +1,170 @@
+---
+import { site } from '../../data/site';
+import Container from '../common/Container.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import IconMenu from '../icons/IconMenu.astro';
+import IconX from '../icons/IconX.astro';
+import IconDownload from '../icons/IconDownload.astro';
+
+const currentPath = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
+---
+
+<header
+  class="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-surface)]/95 backdrop-blur-sm supports-[backdrop-filter]:bg-[var(--color-surface)]/80"
+  role="banner"
+>
+  <Container wide>
+    <div class="flex items-center justify-between h-16">
+      <!-- Site name / logo -->
+      <a
+        href="/"
+        class="text-lg font-bold text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors no-underline"
+        aria-label={`${site.name} — Home`}
+      >
+        {site.shortName || site.name}
+      </a>
+
+      <!-- Desktop navigation -->
+      <nav class="hidden md:flex items-center gap-1" aria-label="Main navigation">
+        {site.nav.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'px-3 py-2 text-sm font-medium rounded-[var(--radius-md)] transition-colors no-underline',
+              isActive(item.href)
+                ? 'text-[var(--color-accent)] bg-[var(--color-accent-light)]'
+                : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface-elevated)]',
+            ]}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+
+        <div class="flex items-center gap-2 ml-4 pl-4 border-l border-[var(--color-border)]">
+          <ThemeToggle />
+          <a
+            href={site.cvPath}
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-[var(--color-accent-contrast)] bg-[var(--color-accent)] rounded-[var(--radius-md)] hover:bg-[var(--color-accent-hover)] transition-colors no-underline"
+            download
+          >
+            <IconDownload size={14} />
+            CV
+          </a>
+        </div>
+      </nav>
+
+      <!-- Mobile controls -->
+      <div class="flex items-center gap-2 md:hidden">
+        <ThemeToggle />
+        <button
+          type="button"
+          id="mobile-menu-button"
+          class="p-2 rounded-[var(--radius-md)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface-elevated)] transition-colors"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Open menu"
+        >
+          <IconMenu size={24} class="menu-icon-open" />
+          <IconX size={24} class="menu-icon-close hidden" />
+        </button>
+      </div>
+    </div>
+  </Container>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden border-t border-[var(--color-border)]"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Mobile navigation"
+  >
+    <Container>
+      <nav class="py-4 space-y-1" aria-label="Mobile navigation">
+        {site.nav.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'block px-3 py-2.5 text-base font-medium rounded-[var(--radius-md)] transition-colors no-underline',
+              isActive(item.href)
+                ? 'text-[var(--color-accent)] bg-[var(--color-accent-light)]'
+                : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface-elevated)]',
+            ]}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+        <div class="pt-2 border-t border-[var(--color-border)] mt-2">
+          <a
+            href={site.cvPath}
+            class="inline-flex items-center gap-1.5 px-3 py-2.5 text-base font-medium text-[var(--color-accent)] no-underline"
+            download
+          >
+            <IconDownload size={16} />
+            Download CV
+          </a>
+        </div>
+      </nav>
+    </Container>
+  </div>
+</header>
+
+<script>
+  function initMobileMenu() {
+    const button = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+    if (!button || !menu) return;
+
+    const openIcon = button.querySelector('.menu-icon-open');
+    const closeIcon = button.querySelector('.menu-icon-close');
+
+    function toggleMenu(open?: boolean) {
+      const isOpen = open ?? menu!.classList.contains('hidden');
+      menu!.classList.toggle('hidden', !isOpen);
+      button!.setAttribute('aria-expanded', String(isOpen));
+      button!.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      openIcon?.classList.toggle('hidden', isOpen);
+      closeIcon?.classList.toggle('hidden', !isOpen);
+
+      if (isOpen) {
+        // Focus the first link in the menu
+        const firstLink = menu!.querySelector('a');
+        firstLink?.focus();
+      }
+    }
+
+    button.addEventListener('click', () => toggleMenu());
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu!.classList.contains('hidden')) {
+        toggleMenu(false);
+        button.focus();
+      }
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+      const target = e.target as Node;
+      if (!menu!.classList.contains('hidden') && !menu!.contains(target) && !button.contains(target)) {
+        toggleMenu(false);
+      }
+    });
+
+    // Close on navigation (for SPA-like behavior)
+    const links = menu.querySelectorAll('a');
+    links.forEach((link) => {
+      link.addEventListener('click', () => toggleMenu(false));
+    });
+  }
+
+  initMobileMenu();
+  document.addEventListener('astro:after-swap', initMobileMenu);
+</script>

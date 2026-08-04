@@ -1,0 +1,88 @@
+---
+title: "Adaptive Cruise Control for a 1:10-Scale Ackermann Mobile Robot"
+summary: "Developed an Adaptive Cruise Control system for a 1:10-scale Ackermann mobile robot using a Fuzzy Social Force Model optimized with Particle Swarm Optimization."
+year: "[DUMMY — REPLACE: 2025–2026]"
+period: "[DUMMY — REPLACE: 2025–2026]"
+role: "Final Project Researcher and Developer"
+categories:
+  - Robotics
+  - Control Systems
+technologies:
+  - ROS
+  - Gazebo
+  - Jetson Nano
+  - LiDAR
+  - Python
+  - C++
+  - Fuzzy Sugeno
+  - PSO
+featured: true
+order: 1
+status: "ongoing"
+coverImage: "/media/projects/ackermann-adaptive-cruise-control/cover.svg"
+coverAlt: "Adaptive Cruise Control system architecture for Ackermann robot"
+heroImage: "/media/projects/ackermann-adaptive-cruise-control/cover.svg"
+heroAlt: "Adaptive Cruise Control system for Ackermann mobile robot"
+videoUrl: ""
+videoPoster: "/media/projects/ackermann-adaptive-cruise-control/demo-poster.svg"
+gallery:
+  - src: "/media/projects/ackermann-adaptive-cruise-control/architecture.svg"
+    alt: "System architecture diagram"
+    caption: "Overall control architecture"
+  - src: "/media/projects/ackermann-adaptive-cruise-control/gallery-01.svg"
+    alt: "Simulation environment"
+    caption: "Gazebo simulation setup"
+  - src: "/media/projects/ackermann-adaptive-cruise-control/gallery-02.svg"
+    alt: "Test results graph"
+    caption: "Distance tracking performance"
+draft: false
+hasDummyData: true
+---
+
+## Project Overview
+The overarching goal of this project is to implement a robust, autonomous Adaptive Cruise Control (ACC) system tailored for a 1:10-scale Ackermann steering mobile robot. Traditional ACC systems in automotive engineering rely heavily on predefined dynamic mathematical models, but mobile robots operating in unstructured or semi-structured environments face unique disturbances. This project demonstrates a novel approach combining a Fuzzy Social Force Model (FSFM) optimized dynamically by a Particle Swarm Optimization (PSO) algorithm to continuously adjust following distances and velocities in real-time.
+
+## Context and Problem
+Implementing ACC on smaller scale mobile robots introduces challenges not seen in full-scale autonomous vehicles. A 1:10 scale robot has significantly constrained processing capabilities, distinct actuator dynamics, and faces acute noise from low-cost LiDAR and odometry sensors. Furthermore, classic PID controllers fail to handle the non-linearities and rapidly changing dynamic states of the target vehicle. The primary problem was identifying a control mechanism that could maintain a safe relative distance while remaining computationally light enough to run on edge computing hardware (Jetson Nano) without sacrificing real-time response.
+
+## My Role
+As the solo researcher and developer for this final-year capstone project, I was responsible for the entire pipeline. This included formulating the mathematical control model, developing the simulation environment in Gazebo, writing ROS nodes in Python and C++, setting up the hardware bridge on the Jetson Nano, and running the optimization algorithms. I also conducted all performance metric gathering and system validations.
+
+## Objectives
+- Formulate a hybrid control logic utilizing a Fuzzy Inference System combined with a Social Force Model.
+- Apply Particle Swarm Optimization to automatically tune the Fuzzy logic rule base and membership functions offline and online.
+- Achieve a stable following distance with minimal oscillations during rapid target vehicle acceleration/deceleration phases.
+- Ensure the software stack operates at a minimum of 30Hz within the constrained compute environment of an NVIDIA Jetson Nano.
+- Bridge simulation (Gazebo) to reality seamlessly using a standard ROS architecture.
+
+## System Architecture
+The system architecture revolves around ROS (Robot Operating System) acting as the middleware between the hardware layer and the high-level decision-making nodes. 
+- **Perception Layer:** A 2D LiDAR module combined with wheel encoders feeds relative distance and velocity estimates of the leading target to the ROS stack.
+- **Compute Layer:** An NVIDIA Jetson Nano aggregates sensor data, applies an Extended Kalman Filter (EKF) to smooth the readings, and feeds them into the ACC node.
+- **Controller Node:** Contains the FSFM algorithm calculating the desired linear velocity and steering angle. The steering relies on standard Ackermann kinematics, while the longitudinal velocity is governed by the Fuzzy Sugeno controller.
+- **Actuation Layer:** A low-level microcontroller translates the output velocities into PWM signals for the DC drive motor and the steering servo.
+
+## Technical Approach
+The core of the ACC is built upon a Fuzzy Sugeno inference engine due to its computational efficiency compared to Mamdani models. The input variables are `Relative Distance` and `Relative Velocity`. To define the complex rule base logically, a Social Force Model is layered on top, treating the target vehicle as an "attractive" or "repulsive" force depending on safety thresholds. 
+
+To prevent manual trial-and-error tuning, I implemented a Particle Swarm Optimization (PSO) algorithm. In simulation, the PSO evaluated hundreds of parameter permutations over standardized driving cycles, optimizing for a cost function that penalized high distance errors, excessive jerk, and overshoot.
+
+## Engineering Challenges
+The most prominent challenge was dealing with noisy LiDAR data during cornering. When the target vehicle entered a turn, the 2D LiDAR frequently lost the centroid of the target, leading to sudden spikes in relative distance calculations. I had to implement a temporal tracking filter that predicts the target's trajectory during brief occlusions.
+
+Another major hurdle was the sim-to-real gap. The Gazebo simulation assumes near-perfect wheel traction and instant actuator response. In reality, the 1:10 robot experienced noticeable slip and servo delay. Compensating for this required adding a robust delay-handling term to the Fuzzy logic rules to prevent runaway oscillations during high-speed following.
+
+## Decisions and Trade-offs
+- **Fuzzy Sugeno over Mamdani:** Selected because defuzzification in Sugeno (weighted average) is significantly faster and less mathematically intensive than computing the centroid of an area, which was critical for the Jetson Nano's CPU load.
+- **PSO over Genetic Algorithms:** Particle Swarm Optimization converged faster given the continuous nature of the fuzzy membership function parameters, allowing for rapid iteration during simulation phases.
+- **2D LiDAR over Stereo Vision:** While vision provides richer context, 2D LiDAR offers lower latency distance measurements and requires a fraction of the processing overhead, aligning with the real-time requirements of the control loop.
+
+## Results and Validation
+The system was validated through extensive simulated driving cycles mimicking urban stop-and-go and highway cruising scenarios. Over the course of [DUMMY — REPLACE: 20] test scenarios, the ACC maintained stable tracking. 
+Performance metrics indicated an average distance error of only [DUMMY — REPLACE: 0.12 m] and a maximum speed error of [DUMMY — REPLACE: 0.08 m/s] during steady-state following. Compared to a baseline PID controller, the optimized Fuzzy controller achieved an oscillation reduction of [DUMMY — REPLACE: 25%], significantly improving the smoothness of the ride.
+
+## Limitations
+The current iteration struggles under extreme cornering where the leading vehicle falls entirely out of the 2D LiDAR's field of view for extended periods. Furthermore, the PSO was run primarily offline; dynamic online adaptation of the membership functions in response to changing floor friction (e.g., transitioning from tile to carpet) is not yet supported and can degrade tracking performance.
+
+## Lessons Learned
+Working on this system deeply reinforced my understanding of control systems and the often painful reality of the sim-to-real gap. I learned that an algorithm's theoretical mathematical proof is only as good as the cleanliness of the sensor data feeding it. Moving forward, I plan to integrate a basic vision-based tracking module to fuse with the LiDAR, ensuring persistent target lock even during aggressive maneuvers.

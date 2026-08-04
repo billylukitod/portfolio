@@ -1,0 +1,31 @@
+---
+import { site } from '../../data/site';
+import SocialLinks from './SocialLinks.astro';
+import Container from './Container.astro';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="mt-auto border-t border-[var(--color-border)] bg-[var(--color-surface)] py-8">
+  <Container>
+    <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
+      <div class="flex flex-col items-center gap-1 sm:items-start">
+        <span class="text-sm font-semibold text-[var(--color-text-primary)]">{site.name}</span>
+        <p class="text-sm text-[var(--color-text-muted)]">
+          &copy; {currentYear} {site.name}. All rights reserved.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <SocialLinks size={20} />
+        <a
+          href="#main-content"
+          class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors no-underline hidden sm:block"
+          aria-label="Back to top"
+        >
+          &uarr; Top
+        </a>
+      </div>
+    </div>
+  </Container>
+</footer>

@@ -1,0 +1,53 @@
+---
+import { getCollection, render } from 'astro:content';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', ({ data }) => !data.draft);
+  const sorted = projects.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+  return sorted.map((project, index) => {
+    const prev = index > 0
+      ? { slug: sorted[index - 1].id, title: sorted[index - 1].data.title }
+      : null;
+    const next = index < sorted.length - 1
+      ? { slug: sorted[index + 1].id, title: sorted[index + 1].data.title }
+      : null;
+
+    return {
+      params: { slug: project.id },
+      props: { project, prevProject: prev, nextProject: next },
+    };
+  });
+}
+
+const { project, prevProject, nextProject } = Astro.props;
+const { Content } = await render(project);
+const { data } = project;
+---
+
+<ProjectLayout
+  title={data.title}
+  summary={data.summary}
+  coverImage={data.coverImage}
+  coverAlt={data.coverAlt}
+  heroImage={data.heroImage}
+  heroAlt={data.heroAlt}
+  role={data.role}
+  period={data.period}
+  year={data.year}
+  status={data.status}
+  categories={data.categories}
+  technologies={data.technologies}
+  repositoryUrl={data.repositoryUrl}
+  liveUrl={data.liveUrl}
+  videoUrl={data.videoUrl}
+  videoPoster={data.videoPoster}
+  gallery={data.gallery}
+  hasDummyData={data.hasDummyData}
+  seoDescription={data.seoDescription}
+  prevProject={prevProject}
+  nextProject={nextProject}
+>
+  <Content />
+</ProjectLayout>

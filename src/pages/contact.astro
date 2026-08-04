@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/common/Container.astro';
+import ButtonLink from '../components/common/ButtonLink.astro';
+import IconMail from '../components/icons/IconMail.astro';
+import IconLinkedin from '../components/icons/IconLinkedin.astro';
+import IconGithub from '../components/icons/IconGithub.astro';
+import IconMapPin from '../components/icons/IconMapPin.astro';
+import IconDownload from '../components/icons/IconDownload.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Contact" description="Get in touch for engineering roles, research collaboration, and technical projects.">
+  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
+    <Container>
+      <div class="max-w-2xl mx-auto">
+        <h1 class="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-6 text-center">
+          Get in Touch
+        </h1>
+
+        <div class="text-center mb-12">
+          <p class="text-lg text-[var(--color-text-secondary)] leading-relaxed mb-4">
+            {site.availability}
+          </p>
+          <p class="text-[var(--color-text-muted)] flex items-center justify-center gap-2">
+            <IconMapPin size={16} />
+            {site.location}
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
+          <a
+            href={`mailto:${site.email}`}
+            class="flex items-center gap-3 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors no-underline"
+          >
+            <div class="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--color-accent-light)] flex items-center justify-center">
+              <IconMail size={20} class="text-[var(--color-accent)]" />
+            </div>
+            <div>
+              <div class="text-sm font-medium text-[var(--color-text-primary)]">{site.contactCta.emailLabel}</div>
+              <div class="text-xs text-[var(--color-text-muted)]">{site.email}</div>
+            </div>
+          </a>
+
+          <a
+            href={site.social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-3 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors no-underline"
+          >
+            <div class="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--color-accent-light)] flex items-center justify-center">
+              <IconLinkedin size={20} class="text-[var(--color-accent)]" />
+            </div>
+            <div>
+              <div class="text-sm font-medium text-[var(--color-text-primary)]">{site.contactCta.linkedinLabel}</div>
+              <div class="text-xs text-[var(--color-text-muted)]">LinkedIn Profile</div>
+            </div>
+          </a>
+
+          <a
+            href={site.social.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-3 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors no-underline"
+          >
+            <div class="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--color-accent-light)] flex items-center justify-center">
+              <IconGithub size={20} class="text-[var(--color-accent)]" />
+            </div>
+            <div>
+              <div class="text-sm font-medium text-[var(--color-text-primary)]">GitHub</div>
+              <div class="text-xs text-[var(--color-text-muted)]">Open Source</div>
+            </div>
+          </a>
+
+          <a
+            href={site.cvPath}
+            download
+            class="flex items-center gap-3 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors no-underline"
+          >
+            <div class="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--color-accent-light)] flex items-center justify-center">
+              <IconDownload size={20} class="text-[var(--color-accent)]" />
+            </div>
+            <div>
+              <div class="text-sm font-medium text-[var(--color-text-primary)]">Download CV</div>
+              <div class="text-xs text-[var(--color-text-muted)]">PDF format</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="text-center p-8 rounded-[var(--radius-lg)] bg-[var(--color-surface)] border border-[var(--color-border)]">
+          <h2 class="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
+            {site.contactCta.heading}
+          </h2>
+          <p class="text-[var(--color-text-secondary)] mb-6">
+            {site.contactCta.body}
+          </p>
+          <ButtonLink href={`mailto:${site.email}`} variant="primary">
+            <IconMail size={16} class="mr-2" />
+            {site.contactCta.emailLabel}
+          </ButtonLink>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

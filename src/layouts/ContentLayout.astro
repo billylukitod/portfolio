@@ -1,0 +1,31 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Container from '../components/common/Container.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  publishedAt?: Date;
+  updatedAt?: Date;
+}
+
+const { title, description, image, publishedAt, updatedAt } = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={image}
+  type={publishedAt ? 'article' : 'website'}
+  publishedAt={publishedAt}
+  updatedAt={updatedAt}
+>
+  <article class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
+    <Container>
+      <div class="max-w-[var(--width-content)] mx-auto prose-custom">
+        <slot />
+      </div>
+    </Container>
+  </article>
+</BaseLayout>

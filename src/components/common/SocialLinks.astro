@@ -1,0 +1,37 @@
+---
+import { site } from '../../data/site';
+import IconGithub from '../icons/IconGithub.astro';
+import IconLinkedin from '../icons/IconLinkedin.astro';
+
+interface Props {
+  class?: string;
+  size?: number;
+}
+
+const { class: className = '', size = 24 } = Astro.props;
+---
+
+<div class:list={['flex items-center gap-4', className]}>
+  {site.social.github && (
+    <a
+      href={site.social.github}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="GitHub Profile"
+      class="text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-sm"
+    >
+      <IconGithub size={size} />
+    </a>
+  )}
+  {site.social.linkedin && (
+    <a
+      href={site.social.linkedin}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="LinkedIn Profile"
+      class="text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-sm"
+    >
+      <IconLinkedin size={size} />
+    </a>
+  )}
+</div>

@@ -1,0 +1,35 @@
+---
+interface GalleryImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  images: GalleryImage[];
+}
+
+const { images } = Astro.props;
+---
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+  {
+    images.map((image) => (
+      <figure class="rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface-elevated)]">
+        <img
+          src={image.src}
+          alt={image.alt}
+          width="800"
+          height="450"
+          class="w-full h-auto object-cover"
+          loading="lazy"
+        />
+        {image.caption && (
+          <figcaption class="px-3 py-2 text-sm text-[var(--color-text-muted)] border-t border-[var(--color-border)]">
+            {image.caption}
+          </figcaption>
+        )}
+      </figure>
+    ))
+  }
+</div>

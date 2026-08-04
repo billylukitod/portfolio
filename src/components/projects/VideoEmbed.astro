@@ -1,0 +1,172 @@
+---
+import IconPlay from '../icons/IconPlay.astro';
+
+interface Props {
+  url: string;
+  poster?: string;
+  title?: string;
+}
+
+const { url, poster, title = 'Video demo' } = Astro.props;
+
+function getVideoType(videoUrl: string): 'youtube' | 'vimeo' | 'local' | 'none' {
+  if (!videoUrl) return 'none';
+  if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) return 'youtube';
+  if (videoUrl.includes('vimeo.com')) return 'vimeo';
+  return 'local';
+}
+
+function getYouTubeId(videoUrl: string): string | null {
+  const match = videoUrl.match(
+    /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+  );
+  return match ? match[1] : null;
+}
+
+function getVimeoId(videoUrl: string): string | null {
+  const match = videoUrl.match(/vimeo\.com\/(\d+)/);
+  return match ? match[1] : null;
+}
+
+const videoType = getVideoType(url);
+const youtubeId = videoType === 'youtube' ? getYouTubeId(url) : null;
+const vimeoId = videoType === 'vimeo' ? getVimeoId(url) : null;
+---
+
+{
+  videoType === 'local' && (
+    <div class="rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-border)] bg-black">
+      <video
+        controls
+        preload="metadata"
+        poster={poster}
+        class="w-full h-auto"
+        aria-label={title}
+      >
+        <source src={url} type={url.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
+        <p>
+          Your browser does not support the video element.
+          <a href={url} class="text-[var(--color-accent)] underline">
+            Download the video
+          </a>
+        </p>
+      </video>
+    </div>
+  )
+}
+
+{
+  videoType === 'youtube' && youtubeId && (
+    <div
+      class="video-embed-wrapper rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-border)] bg-black relative aspect-video cursor-pointer group"
+      data-video-id={youtubeId}
+      data-video-type="youtube"
+      role="button"
+      tabindex="0"
+      aria-label={`Play ${title}`}
+    >
+      <img
+        src={poster || `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`}
+        alt={`${title} video thumbnail`}
+        class="w-full h-full object-cover"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
+        <div class="w-16 h-16 flex items-center justify-center rounded-full bg-red-600 text-white group-hover:scale-110 transition-transform">
+          <IconPlay size={28} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+{
+  videoType === 'vimeo' && vimeoId && (
+    <div
+      class="video-embed-wrapper rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-border)] bg-black relative aspect-video cursor-pointer group"
+      data-video-id={vimeoId}
+      data-video-type="vimeo"
+      role="button"
+      tabindex="0"
+      aria-label={`Play ${title}`}
+    >
+      {poster && (
+        <img
+          src={poster}
+          alt={`${title} video thumbnail`}
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      )}
+      <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
+        <div class="w-16 h-16 flex items-center justify-center rounded-full bg-[#1ab7ea] text-white group-hover:scale-110 transition-transform">
+          <IconPlay size={28} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+{
+  videoType === 'none' && poster && (
+    <div class="rounded-[var(--radius-lg)] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface-elevated)] relative">
+      <img
+        src={poster}
+        alt={`${title} — video coming soon`}
+        class="w-full h-auto object-cover"
+        loading="lazy"
+        width="800"
+        height="450"
+      />
+      <div class="absolute inset-0 flex items-center justify-center bg-black/20">
+        <span class="px-4 py-2 text-sm font-medium text-white bg-black/60 rounded-[var(--radius-md)]">
+          Video coming soon
+        </span>
+      </div>
+    </div>
+  )
+}
+
+<script>
+  function initVideoEmbeds() {
+    document.querySelectorAll('.video-embed-wrapper').forEach((wrapper) => {
+      function loadEmbed() {
+        const videoId = (wrapper as HTMLElement).dataset.videoId;
+        const videoType = (wrapper as HTMLElement).dataset.videoType;
+
+        if (!videoId || !videoType) return;
+
+        let src = '';
+        if (videoType === 'youtube') {
+          src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+        } else if (videoType === 'vimeo') {
+          src = `https://player.vimeo.com/video/${videoId}?autoplay=1`;
+        }
+
+        const iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+        iframe.allowFullscreen = true;
+        iframe.className = 'w-full h-full absolute inset-0';
+        iframe.title = 'Video player';
+
+        wrapper.innerHTML = '';
+        wrapper.classList.remove('cursor-pointer');
+        wrapper.removeAttribute('role');
+        wrapper.removeAttribute('tabindex');
+        wrapper.appendChild(iframe);
+      }
+
+      wrapper.addEventListener('click', loadEmbed, { once: true });
+      wrapper.addEventListener('keydown', (e) => {
+        if ((e as KeyboardEvent).key === 'Enter' || (e as KeyboardEvent).key === ' ') {
+          e.preventDefault();
+          loadEmbed();
+        }
+      }, { once: true });
+    });
+  }
+
+  initVideoEmbeds();
+  document.addEventListener('astro:after-swap', initVideoEmbeds);
+</script>

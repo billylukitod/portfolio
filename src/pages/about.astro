@@ -1,0 +1,151 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/common/Container.astro';
+import SectionHeading from '../components/common/SectionHeading.astro';
+import ButtonLink from '../components/common/ButtonLink.astro';
+import TechnologyTags from '../components/projects/TechnologyTags.astro';
+import { site } from '../data/site';
+import { experiences } from '../data/experience';
+import { skillGroups } from '../data/skills';
+import { achievements, education } from '../data/achievements';
+---
+
+<BaseLayout title="About" description={`About ${site.name} — ${site.title}`}>
+  <!-- Page header -->
+  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)] bg-[var(--color-surface)]">
+    <Container>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+        <div class="md:col-span-4 flex flex-col items-center">
+          <div class="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-[var(--color-border)] bg-[var(--color-surface-elevated)]">
+            <img
+              src="/media/profile/photo.svg"
+              alt={`${site.name} profile photo`}
+              width="300"
+              height="300"
+              class="w-full h-full object-cover"
+              loading="eager"
+            />
+          </div>
+          <div class="mt-8 flex flex-col gap-3 w-full max-w-xs">
+            <ButtonLink href="/projects" variant="primary" class="justify-center">View Projects</ButtonLink>
+            <ButtonLink href="/contact" variant="secondary" class="justify-center">Get in Touch</ButtonLink>
+          </div>
+        </div>
+
+        <div class="md:col-span-8 space-y-8">
+          <div>
+            <h1 class="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-2">About Me</h1>
+            <p class="text-[var(--color-accent)] font-medium">{site.title}</p>
+          </div>
+
+          <div class="space-y-4 text-[var(--color-text-secondary)] leading-relaxed text-lg">
+            {site.aboutBio.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+
+          <div>
+            <h2 class="text-xl font-semibold text-[var(--color-text-primary)] mb-3">Engineering Philosophy</h2>
+            <p class="text-[var(--color-text-secondary)] leading-relaxed">{site.aboutPhilosophy}</p>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-semibold text-[var(--color-text-primary)] mb-3">Current Interests</h2>
+            <p class="text-[var(--color-text-secondary)] leading-relaxed">{site.aboutInterests}</p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
+    <Container>
+      <SectionHeading title="Experience" />
+      <div class="mt-10 max-w-3xl space-y-8">
+        {experiences.map((exp) => (
+          <div class="flex flex-col md:flex-row gap-4 md:gap-8 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)]">
+            <div class="md:w-1/4 shrink-0">
+              <p class="text-sm text-[var(--color-text-muted)] font-mono">{exp.period}</p>
+            </div>
+            <div class="md:w-3/4">
+              <h3 class="text-lg font-bold text-[var(--color-text-primary)]">{exp.role}</h3>
+              <p class="text-[var(--color-accent)] font-medium mb-2">{exp.organization}</p>
+              <p class="text-[var(--color-text-secondary)]">{exp.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Education & Achievements -->
+  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)] bg-[var(--color-surface)]">
+    <Container>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div>
+          <SectionHeading title="Education" />
+          <div class="mt-8 space-y-6">
+            {education.map((edu) => (
+              <div class="p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg)]">
+                <h3 class="text-lg font-bold text-[var(--color-text-primary)]">{edu.degree}</h3>
+                <p class="text-[var(--color-accent)] font-medium">{edu.institution}</p>
+                <p class="text-sm text-[var(--color-text-muted)] font-mono mt-1">{edu.period}</p>
+                {edu.description && (
+                  <p class="text-[var(--color-text-secondary)] mt-2 text-sm">{edu.description}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <SectionHeading title="Achievements" />
+          <div class="mt-8 space-y-6">
+            {achievements.map((achievement) => (
+              <div class="p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg)]">
+                <h3 class="text-lg font-bold text-[var(--color-text-primary)]">{achievement.title}</h3>
+                {achievement.event && (
+                  <p class="text-[var(--color-accent)] font-medium">{achievement.event}</p>
+                )}
+                <p class="text-sm text-[var(--color-text-muted)] font-mono mt-1">{achievement.year}</p>
+                <p class="text-[var(--color-text-secondary)] mt-2 text-sm">{achievement.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Skills -->
+  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
+    <Container>
+      <SectionHeading title="Skills & Tools" />
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {skillGroups.map((group) => (
+          <div class="p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)]">
+            <h3 class="text-lg font-semibold text-[var(--color-text-primary)] mb-4">{group.category}</h3>
+            <TechnologyTags technologies={group.skills} />
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-[var(--spacing-section)] bg-[var(--color-surface)] text-center">
+    <Container>
+      <div class="max-w-xl mx-auto">
+        <h2 class="text-2xl font-bold text-[var(--color-text-primary)] mb-4">Want to work together?</h2>
+        <p class="text-[var(--color-text-secondary)] mb-8">
+          Check out my projects or get in touch to discuss engineering roles, research, and collaboration.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <ButtonLink href="/projects" variant="primary">View Projects</ButtonLink>
+          <ButtonLink href="/contact" variant="secondary">Contact Me</ButtonLink>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

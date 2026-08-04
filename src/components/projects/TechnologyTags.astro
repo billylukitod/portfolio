@@ -1,0 +1,18 @@
+---
+interface Props {
+  technologies: string[];
+  class?: string;
+}
+
+const { technologies, class: className = '' } = Astro.props;
+---
+
+<div class:list={['flex flex-wrap gap-1.5', className]}>
+  {
+    technologies.map((tech) => (
+      <span class="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-[var(--radius-md)] bg-[var(--color-tag-bg)] text-[var(--color-tag-text)] border border-[var(--color-border-subtle)]">
+        {tech}
+      </span>
+    ))
+  }
+</div>

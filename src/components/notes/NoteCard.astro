@@ -1,0 +1,67 @@
+---
+import IconClock from '../icons/IconClock.astro';
+import IconCalendar from '../icons/IconCalendar.astro';
+import IconChevronRight from '../icons/IconChevronRight.astro';
+
+interface Props {
+  title: string;
+  slug: string;
+  summary: string;
+  publishedAt: Date;
+  tags: string[];
+  readingTime?: number;
+}
+
+const { title, slug, summary, publishedAt, tags, readingTime } = Astro.props;
+
+const formattedDate = publishedAt.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<article class="group">
+  <a
+    href={`/notes/${slug}`}
+    class="block p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-sm)] transition-all duration-200 no-underline"
+  >
+    <div class="flex items-center gap-3 text-xs text-[var(--color-text-muted)] mb-2">
+      <span class="flex items-center gap-1">
+        <IconCalendar size={12} />
+        <time datetime={publishedAt.toISOString()}>{formattedDate}</time>
+      </span>
+      {readingTime && (
+        <span class="flex items-center gap-1">
+          <IconClock size={12} />
+          {readingTime} min read
+        </span>
+      )}
+    </div>
+
+    <h3
+      class="text-lg font-semibold text-[var(--color-text-primary)] mb-2 group-hover:text-[var(--color-accent)] transition-colors"
+    >
+      {title}
+    </h3>
+
+    <p class="text-sm text-[var(--color-text-secondary)] mb-3 line-clamp-2">{summary}</p>
+
+    {tags.length > 0 && (
+      <div class="flex flex-wrap gap-1.5 mb-3">
+        {tags.map((tag) => (
+          <span class="text-xs px-2 py-0.5 rounded-full bg-[var(--color-tag-bg)] text-[var(--color-tag-text)]">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+
+    <span
+      class="flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] group-hover:gap-2 transition-all"
+    >
+      Read more
+      <IconChevronRight size={14} />
+    </span>
+  </a>
+</article>

@@ -1,0 +1,55 @@
+---
+import TechnologyTags from './TechnologyTags.astro';
+import IconArrowRight from '../icons/IconArrowRight.astro';
+
+interface Props {
+  title: string;
+  slug: string;
+  summary: string;
+  year: string;
+  role: string;
+  coverImage: string;
+  coverAlt: string;
+  technologies: string[];
+  featured?: boolean;
+}
+
+const { title, slug, summary, year, role, coverImage, coverAlt, technologies } = Astro.props;
+---
+
+<article class="group">
+  <a
+    href={`/projects/${slug}`}
+    class="block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-md)] transition-all duration-200 no-underline"
+  >
+    <div class="aspect-video overflow-hidden bg-[var(--color-surface-elevated)]">
+      <img
+        src={coverImage}
+        alt={coverAlt}
+        width="800"
+        height="450"
+        class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+        loading="lazy"
+      />
+    </div>
+    <div class="p-5">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-xs font-medium text-[var(--color-text-muted)]">{year}</span>
+        <span class="text-xs text-[var(--color-text-muted)]">{role}</span>
+      </div>
+      <h3
+        class="text-lg font-semibold text-[var(--color-text-primary)] mb-2 group-hover:text-[var(--color-accent)] transition-colors"
+      >
+        {title}
+      </h3>
+      <p class="text-sm text-[var(--color-text-secondary)] mb-4 line-clamp-2">{summary}</p>
+      <TechnologyTags technologies={technologies.slice(0, 5)} />
+      <div
+        class="mt-4 flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] group-hover:gap-2 transition-all"
+      >
+        View case study
+        <IconArrowRight size={14} />
+      </div>
+    </div>
+  </a>
+</article>

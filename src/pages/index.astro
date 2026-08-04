@@ -1,0 +1,248 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/common/Container.astro';
+import SectionHeading from '../components/common/SectionHeading.astro';
+import ButtonLink from '../components/common/ButtonLink.astro';
+import SocialLinks from '../components/common/SocialLinks.astro';
+import ProjectCard from '../components/projects/ProjectCard.astro';
+import NoteCard from '../components/notes/NoteCard.astro';
+import IconArrowRight from '../components/icons/IconArrowRight.astro';
+import IconMail from '../components/icons/IconMail.astro';
+import IconLinkedin from '../components/icons/IconLinkedin.astro';
+import { site } from '../data/site';
+import { experiences } from '../data/experience';
+import { getCollection } from 'astro:content';
+import { getReadingTime } from '../utils/dates';
+
+const allProjects = await getCollection('projects', ({ data }) => !data.draft);
+const featuredProjects = allProjects
+  .filter((p) => p.data.featured)
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+const allNotes = await getCollection('notes', ({ data }) => !data.draft);
+const latestNotes = allNotes
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
+  .slice(0, 3);
+
+const focusAreas = [
+  {
+    title: 'Robotics & Autonomy',
+    description: 'ROS, Gazebo, SLAM, navigation, LiDAR, Ackermann systems. Building robust autonomous behaviors and simulation environments.',
+    icon: '🤖',
+  },
+  {
+    title: 'Embedded & Electronics',
+    description: 'STM32, ESP32, FreeRTOS, PCB design, sensors, debugging. Developing reliable firmware and hardware architectures.',
+    icon: '⚡',
+  },
+  {
+    title: 'Control & Integration',
+    description: 'Fuzzy logic, PSO, control systems, system integration, testing. Bridging algorithms and physical execution.',
+    icon: '🎛️',
+  },
+];
+---
+
+<BaseLayout title={site.seo.defaultTitle} description={site.description}>
+  <!-- 1. Hero -->
+  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="flex flex-col gap-6">
+          <p class="text-[var(--color-accent)] font-mono text-sm tracking-wide uppercase font-semibold">
+            {site.eyebrow}
+          </p>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-[var(--color-text-primary)]">
+            {site.headline}
+          </h1>
+          <p class="text-xl text-[var(--color-text-secondary)] max-w-2xl leading-relaxed">
+            {site.summary}
+          </p>
+          <div class="flex flex-wrap gap-4 mt-2">
+            <ButtonLink href={site.heroCtaPrimary.href} variant="primary">
+              {site.heroCtaPrimary.label}
+              <IconArrowRight size={16} class="ml-2 inline" />
+            </ButtonLink>
+            <ButtonLink href={site.heroCtaSecondary.href} variant="secondary">
+              {site.heroCtaSecondary.label}
+            </ButtonLink>
+          </div>
+          <div class="mt-2 flex items-center gap-4">
+            <span class="text-[var(--color-text-muted)] text-sm font-medium">Connect:</span>
+            <SocialLinks />
+          </div>
+        </div>
+        <div class="rounded-[var(--radius-xl)] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface-elevated)]">
+          <img
+            src="/media/projects/ackermann-adaptive-cruise-control/cover.svg"
+            alt="Autonomous system engineering visualization"
+            width="800"
+            height="450"
+            class="w-full h-auto object-cover"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 2. Engineering Focus -->
+  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)] bg-[var(--color-surface)]">
+    <Container>
+      <SectionHeading title="Engineering Focus" align="center" />
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+        {focusAreas.map((area) => (
+          <div class="rounded-[var(--radius-lg)] p-8 border border-[var(--color-border)] bg-[var(--color-bg)] border-t-4 border-t-[var(--color-accent)]">
+            <span class="text-3xl mb-4 block" aria-hidden="true">{area.icon}</span>
+            <h3 class="text-xl font-bold text-[var(--color-text-primary)] mb-3">{area.title}</h3>
+            <p class="text-[var(--color-text-secondary)] leading-relaxed">{area.description}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- 3. Featured Projects -->
+  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
+    <Container>
+      <div class="flex justify-between items-end mb-10">
+        <SectionHeading title="Featured Projects" />
+        <a
+          href="/projects"
+          class="text-[var(--color-accent)] font-medium hover:underline hidden sm:flex items-center gap-1 group no-underline"
+        >
+          All Projects
+          <IconArrowRight size={16} class="group-hover:translate-x-1 transition-transform" />
+        </a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {featuredProjects.map((project) => (
+          <ProjectCard
+            title={project.data.title}
+            slug={project.id}
+            summary={project.data.summary}
+            year={project.data.year}
+            role={project.data.role}
+            coverImage={project.data.coverImage}
+            coverAlt={project.data.coverAlt}
+            technologies={project.data.technologies}
+            featured={project.data.featured}
+          />
+        ))}
+      </div>
+      <div class="mt-8 text-center sm:hidden">
+        <ButtonLink href="/projects" variant="secondary">View All Projects</ButtonLink>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 4. About Preview -->
+  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)] bg-[var(--color-surface)]">
+    <Container>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+        <div class="md:col-span-4">
+          <div class="rounded-[var(--radius-xl)] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface-elevated)]">
+            <img
+              src="/media/profile/photo.svg"
+              alt="Profile photo placeholder"
+              width="300"
+              height="300"
+              class="w-full h-auto"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <div class="md:col-span-8 flex flex-col gap-6">
+          <SectionHeading title="About Me" />
+          <div class="text-[var(--color-text-secondary)] text-lg space-y-4 leading-relaxed">
+            {site.aboutBio.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+          <div class="mt-2">
+            <ButtonLink href="/about" variant="secondary">
+              More About Me
+              <IconArrowRight size={16} class="ml-2 inline" />
+            </ButtonLink>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 5. Experience Preview -->
+  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
+    <Container>
+      <SectionHeading title="Experience" />
+      <div class="mt-10 max-w-3xl">
+        <div class="relative border-l-2 border-[var(--color-border)] ml-3 md:ml-4 space-y-10">
+          {experiences.slice(0, 3).map((exp) => (
+            <div class="relative pl-8 md:pl-10">
+              <div class="absolute w-3 h-3 bg-[var(--color-accent)] rounded-full -left-[7px] top-2 ring-4 ring-[var(--color-bg)]" />
+              <div class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-4 mb-1">
+                <h3 class="text-lg font-bold text-[var(--color-text-primary)]">{exp.role}</h3>
+                <span class="text-xs font-medium text-[var(--color-accent)] font-mono">
+                  {exp.period}
+                </span>
+              </div>
+              <p class="text-sm font-medium text-[var(--color-text-muted)] mb-2">{exp.organization}</p>
+              <p class="text-[var(--color-text-secondary)] leading-relaxed">{exp.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 6. Latest Notes -->
+  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)] bg-[var(--color-surface)]">
+    <Container>
+      <div class="flex justify-between items-end mb-10">
+        <SectionHeading title="Latest Notes" />
+        <a
+          href="/notes"
+          class="text-[var(--color-accent)] font-medium hover:underline hidden sm:flex items-center gap-1 group no-underline"
+        >
+          All Notes
+          <IconArrowRight size={16} class="group-hover:translate-x-1 transition-transform" />
+        </a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {latestNotes.map((note) => (
+          <NoteCard
+            title={note.data.title}
+            slug={note.id}
+            summary={note.data.summary}
+            publishedAt={note.data.publishedAt}
+            tags={note.data.tags}
+            readingTime={getReadingTime(note.body ?? '')}
+          />
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- 7. Contact CTA -->
+  <section class="py-[var(--spacing-section)] bg-[var(--color-bg)] text-center">
+    <Container>
+      <div class="max-w-2xl mx-auto flex flex-col items-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-6">
+          {site.contactCta.heading}
+        </h2>
+        <p class="text-lg text-[var(--color-text-secondary)] mb-10 leading-relaxed">
+          {site.contactCta.body}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <ButtonLink href={`mailto:${site.email}`} variant="primary">
+            <IconMail size={18} class="mr-2" />
+            {site.contactCta.emailLabel}
+          </ButtonLink>
+          <ButtonLink href={site.social.linkedin} variant="secondary" external>
+            <IconLinkedin size={18} class="mr-2" />
+            {site.contactCta.linkedinLabel}
+          </ButtonLink>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

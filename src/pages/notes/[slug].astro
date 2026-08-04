@@ -1,0 +1,88 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/common/Container.astro';
+import IconCalendar from '../../components/icons/IconCalendar.astro';
+import IconClock from '../../components/icons/IconClock.astro';
+import IconArrowLeft from '../../components/icons/IconArrowLeft.astro';
+import { getReadingTime } from '../../utils/dates';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes', ({ data }) => !data.draft);
+  return notes.map((note) => ({
+    params: { slug: note.id },
+    props: { note },
+  }));
+}
+
+const { note } = Astro.props;
+const { Content } = await render(note);
+const readingTime = getReadingTime(note.body ?? '');
+const formattedDate = note.data.publishedAt.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: note.data.title,
+  description: note.data.summary,
+  datePublished: note.data.publishedAt.toISOString(),
+  keywords: note.data.tags.join(', '),
+};
+---
+
+<BaseLayout
+  title={note.data.title}
+  description={note.data.summary}
+  type="article"
+  publishedAt={note.data.publishedAt}
+  jsonLd={jsonLd}
+>
+  <article class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
+    <Container>
+      <div class="max-w-[var(--width-content)] mx-auto">
+        <a
+          href="/notes"
+          class="inline-flex items-center gap-2 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors mb-8 no-underline"
+        >
+          <IconArrowLeft size={16} />
+          Back to Notes
+        </a>
+
+        <h1 class="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] leading-tight mb-4">
+          {note.data.title}
+        </h1>
+
+        <div class="flex flex-wrap items-center gap-4 text-sm text-[var(--color-text-muted)] mb-6">
+          <span class="flex items-center gap-1.5">
+            <IconCalendar size={14} />
+            <time datetime={note.data.publishedAt.toISOString()}>{formattedDate}</time>
+          </span>
+          <span class="flex items-center gap-1.5">
+            <IconClock size={14} />
+            {readingTime} min read
+          </span>
+        </div>
+
+        {note.data.tags.length > 0 && (
+          <div class="flex flex-wrap gap-1.5 mb-8">
+            {note.data.tags.map((tag: string) => (
+              <span class="px-2.5 py-1 rounded-full bg-[var(--color-tag-bg)] text-[var(--color-tag-text)] text-xs font-medium">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <hr class="border-[var(--color-border)] mb-8" />
+
+        <div class="prose-custom">
+          <Content />
+        </div>
+      </div>
+    </Container>
+  </article>
+</BaseLayout>

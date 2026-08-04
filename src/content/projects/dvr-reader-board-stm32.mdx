@@ -1,0 +1,86 @@
+---
+title: "DVR Reader Board Development and STM32 Migration"
+summary: "Designed a custom DVR Reader board and developed its embedded firmware, covering schematic design, PCB layout, assembly, hardware bring-up, debugging, testing, and migration from ATmega328 to STM32."
+year: "[DUMMY — REPLACE: January–June 2025]"
+period: "[DUMMY — REPLACE: January–June 2025]"
+role: "Electronic Development Engineer Intern"
+categories:
+  - Electronics
+  - Embedded Systems
+technologies:
+  - STM32
+  - ATmega328
+  - Embedded C
+  - KiCad
+  - PCB Design
+  - UART
+  - SPI
+  - I²C
+featured: true
+order: 3
+status: "completed"
+coverImage: "/media/projects/dvr-reader-board-stm32/cover.svg"
+coverAlt: "DVR Reader board custom PCB design"
+heroImage: "/media/projects/dvr-reader-board-stm32/cover.svg"
+heroAlt: "STM32 based custom DVR Reader Board"
+videoUrl: ""
+videoPoster: "/media/projects/dvr-reader-board-stm32/demo-poster.svg"
+gallery:
+  - src: "/media/projects/dvr-reader-board-stm32/architecture.svg"
+    alt: "Board Architecture"
+    caption: "Microcontroller and peripheral routing"
+  - src: "/media/projects/dvr-reader-board-stm32/gallery-01.svg"
+    alt: "KiCad PCB Layout"
+    caption: "4-layer PCB layout in KiCad"
+  - src: "/media/projects/dvr-reader-board-stm32/gallery-02.svg"
+    alt: "Assembled hardware"
+    caption: "Hardware bring-up and testing"
+draft: false
+hasDummyData: true
+---
+
+## Project Overview
+This industrial internship project focused on designing, building, and programming a dedicated DVR Reader Board. The board functions as a high-speed data acquisition and logging interface between analog/digital sensors and a centralized Digital Video Recorder (DVR) backend. Initially prototyped on an 8-bit ATmega architecture, I led the strategic migration to a 32-bit STM32 ecosystem to unlock necessary processing bandwidth.
+
+## Context and Problem
+The company's legacy DVR logging interface relied on older ATmega328-based modules. As the data throughput requirements scaled up—integrating more high-speed sensors and needing faster serial communication—the 8-bit MCU struggled. It frequently dropped UART packets during high-load scenarios and lacked the DMA (Direct Memory Access) capabilities required to parse incoming byte streams efficiently without blocking the main loop. 
+
+## My Role
+As an Electronic Development Engineer Intern, I owned the entire hardware and firmware lifecycle. This involved capturing schematics in KiCad, routing a multi-layer PCB for signal integrity, hand-assembling surface-mount components, and conducting initial hardware bring-up. On the software side, I wrote the bare-metal C code to initialize peripherals, handle interrupts, and eventually ported the entire codebase to the STM32 HAL architecture.
+
+## Objectives
+- Design a compact, electrically robust custom PCB utilizing KiCad with proper ground planes and noise isolation for analog inputs.
+- Establish a reliable high-speed UART link to the main DVR unit.
+- Ensure zero data loss when reading from multiple SPI and I2C peripherals concurrently.
+- Successfully migrate the firmware stack from the ATmega328 to an STM32 ARM Cortex-M microcontroller.
+- Perform rigorous stress testing to validate sustained throughput.
+
+## System Architecture
+The core of the finalized board is an STM32 series microcontroller. 
+- **Input Interfaces:** Multiple I2C buses interface with environmental sensors, while an SPI bus connects to a high-speed ADC for analog signal capture.
+- **Processing:** The STM32 utilizes its DMA controllers to spool sensor data directly into memory buffers, bypassing the CPU to free up cycles for data framing and checksum calculations.
+- **Output Interface:** A robust RS-485 transceiver (driven by the STM32's UART) pushes the packed telemetry frames back to the master DVR host at extremely high baud rates.
+- **Power Delivery:** Custom buck converters step down industrial 12V/24V inputs to clean 3.3V rails for the logic.
+
+## Technical Approach
+During the hardware phase, I focused heavily on PCB best practices: segregating the analog and digital ground planes to reduce crosstalk, using proper decoupling capacitors, and ensuring impedance matching on the high-speed data lines.
+For the firmware migration, I moved away from the Arduino-style super-loop used in the legacy code. I utilized STM32CubeIDE and the HAL library to set up interrupt-driven architectures. By linking the UART TX/RX lines directly to the DMA, the CPU was entirely relieved of byte-by-byte handling, drastically increasing system efficiency.
+
+## Engineering Challenges
+The most punishing challenge was hardware bring-up on the first PCB revision. An errant trace on the I2C clock line caused ringing, leading to intermittent sensor timeouts. I used a high-speed oscilloscope to diagnose the reflection and resolved it in the second board spin by adding inline termination resistors.
+On the firmware side, migrating from the ATmega to the STM32 meant moving from 5V logic to 3.3V logic, which required careful implementation of level shifters and revising the ADC threshold calculations in the C code to prevent overflow errors.
+
+## Decisions and Trade-offs
+- **STM32 vs ESP32:** Despite the ESP32 having a higher clock speed and built-in wireless, the STM32 was selected for its superior peripheral flexibility (more timers, better DMA) and lower power consumption, as wireless connectivity was not required.
+- **KiCad over Altium:** Selected KiCad to align with the engineering team's open-source toolchain mandate, heavily utilizing its interactive router.
+- **4-Layer vs 2-Layer PCB:** Upgraded to a 4-layer stackup. Although slightly more expensive to manufacture, the dedicated inner ground and power planes were crucial for maintaining signal integrity at higher data rates.
+
+## Results and Validation
+The migration was a complete success. By utilizing STM32's DMA capabilities, the UART baud rate was reliably pushed to [DUMMY — REPLACE: 921600] without a single dropped packet. 
+System profiling showed a processing improvement of [DUMMY — REPLACE: 40%] over the legacy 8-bit board, leaving ample CPU headroom for future features. The hardware stability was validated through continuous burn-in testing that spanned [DUMMY — REPLACE: 50 hours] in an industrial temperature chamber.
+
+## Limitations
+The current firmware relies heavily on the STM32 HAL library, which, while rapid for development, introduces some code bloat. For high-volume manufacturing, refactoring the critical sections to use LL (Low-Layer) drivers or direct register access could save flash space and shave off a few micro-seconds of interrupt latency.
+
+## Lessons Learned
+This internship bridged the gap between theoretical electronics and practical product development. I learned how to design for manufacturability (DFM) and realized the massive architectural differences between 8-bit AVRs and 32-bit ARM cores. Mastering DMA on the STM32 was a pivotal moment in my understanding of how to write truly non-blocking embedded software.
