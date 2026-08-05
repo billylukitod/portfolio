@@ -1,6 +1,6 @@
 export const site = {
-  name: '[DUMMY — REPLACE: Your Name]',
-  shortName: '[DUMMY — REPLACE]',
+  name: 'Billy Lukito Danuharja',
+  shortName: 'Billy',
   title: 'Robotics & Embedded Systems Engineer',
   description:
     'Focused on autonomous systems, intelligent control, and hardware–software integration.',
@@ -25,7 +25,7 @@ export const site = {
   ],
   seo: {
     defaultTitle: 'Robotics & Embedded Systems Engineer',
-    titleTemplate: '%s | [DUMMY — REPLACE: Your Name]',
+    titleTemplate: '%s | Billy Lukito Danuharja',
     defaultDescription:
       'Focused on autonomous systems, intelligent control, and hardware–software integration.',
     defaultImage: '/social-card-default.png',

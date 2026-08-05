@@ -6,7 +6,7 @@ import IconMail from '../components/icons/IconMail.astro';
 import IconLinkedin from '../components/icons/IconLinkedin.astro';
 import IconGithub from '../components/icons/IconGithub.astro';
 import IconMapPin from '../components/icons/IconMapPin.astro';
-import IconDownload from '../components/icons/IconDownload.astro';
+import IconFileText from '../components/icons/IconFileText.astro';
 import { site } from '../data/site';
 ---
 
@@ -73,16 +73,15 @@ import { site } from '../data/site';
           </a>
 
           <a
-            href={site.cvPath}
-            download
+            href="/cv"
             class="hover-lift flex items-center gap-3 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors no-underline"
           >
             <div class="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--color-accent-light)] flex items-center justify-center">
-              <IconDownload size={20} class="text-[var(--color-accent)]" />
+              <IconFileText size={20} class="text-[var(--color-accent)]" />
             </div>
             <div>
-              <div class="text-sm font-medium text-[var(--color-text-primary)]">Download CV</div>
-              <div class="text-xs text-[var(--color-text-muted)]">PDF format</div>
+              <div class="text-sm font-medium text-[var(--color-text-primary)]">View CV</div>
+              <div class="text-xs text-[var(--color-text-muted)]">Preview & Download</div>
             </div>
           </a>
         </div>

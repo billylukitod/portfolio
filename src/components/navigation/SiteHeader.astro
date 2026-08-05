@@ -4,7 +4,7 @@ import Container from '../common/Container.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import IconMenu from '../icons/IconMenu.astro';
 import IconX from '../icons/IconX.astro';
-import IconDownload from '../icons/IconDownload.astro';
+import IconFileText from '../icons/IconFileText.astro';
 
 const currentPath = Astro.url.pathname;
 
@@ -20,16 +20,30 @@ function isActive(href: string): boolean {
 >
   <Container wide>
     <div class="flex items-center justify-between h-16">
-      <!-- Site name / logo -->
-      <a
-        href="/"
-        class="text-lg font-bold text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors no-underline"
-        aria-label={`${site.name} — Home`}
-      >
-        {site.shortName || site.name}
-      </a>
+      <!-- Left side: Site name & Controls -->
+      <div class="flex items-center gap-4">
+        <a
+          href="/"
+          class="text-lg font-bold text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors no-underline"
+          aria-label={`${site.name} — Home`}
+        >
+          {site.shortName || site.name}
+        </a>
 
-      <!-- Desktop navigation -->
+        <!-- Desktop Controls -->
+        <div class="hidden md:flex items-center gap-2 pl-4 border-l border-[var(--color-border)]">
+          <ThemeToggle />
+          <a
+            href="/cv"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-[var(--color-accent-contrast)] bg-[var(--color-accent)] rounded-[var(--radius-md)] hover:bg-[var(--color-accent-hover)] transition-colors no-underline"
+          >
+            <IconFileText size={14} />
+            CV
+          </a>
+        </div>
+      </div>
+
+      <!-- Right side: Desktop navigation -->
       <nav class="hidden md:flex items-center gap-1" aria-label="Main navigation">
         {site.nav.map((item) => (
           <a
@@ -45,18 +59,6 @@ function isActive(href: string): boolean {
             {item.label}
           </a>
         ))}
-
-        <div class="flex items-center gap-2 ml-4 pl-4 border-l border-[var(--color-border)]">
-          <ThemeToggle />
-          <a
-            href={site.cvPath}
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-[var(--color-accent-contrast)] bg-[var(--color-accent)] rounded-[var(--radius-md)] hover:bg-[var(--color-accent-hover)] transition-colors no-underline"
-            download
-          >
-            <IconDownload size={14} />
-            CV
-          </a>
-        </div>
       </nav>
 
       <!-- Mobile controls -->
@@ -103,12 +105,11 @@ function isActive(href: string): boolean {
         ))}
         <div class="pt-2 border-t border-[var(--color-border)] mt-2">
           <a
-            href={site.cvPath}
+            href="/cv"
             class="inline-flex items-center gap-1.5 px-3 py-2.5 text-base font-medium text-[var(--color-accent)] no-underline"
-            download
           >
-            <IconDownload size={16} />
-            Download CV
+            <IconFileText size={16} />
+            View CV
           </a>
         </div>
       </nav>
