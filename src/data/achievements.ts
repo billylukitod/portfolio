@@ -8,27 +8,33 @@ export interface Achievement {
 
 export const achievements: Achievement[] = [
   {
-    title: '[DUMMY — VERIFY: Second Place]',
-    event: '[DUMMY — REPLACE: SAFMC 2025]',
-    year: '2025',
-    description:
-      '[DUMMY — REPLACE: Developed autonomous algorithms for an aerial vehicle competition.]',
-    type: 'competition',
-  },
-  {
-    title: "[DUMMY — REPLACE: Dean's List / Academic Achievement]",
-    year: '[DUMMY — REPLACE: 2024]',
-    description:
-      '[DUMMY — REPLACE: Awarded for outstanding academic performance in the engineering faculty.]',
+    title: 'Project Funding Grantee',
+    event: 'Pekan Kreativitas Mahasiswa – Karsa Cipta 2025',
+    year: 'Dec 2025',
+    description: 'Issued by Balai Pengembangan Talenta Indonesia (BPTI) Pusat Prestasi Nasional (Puspresnas) Kementerian Pendidikan, Kebudayaan, Riset dan Teknologi Republik Indonesia.',
     type: 'academic',
   },
   {
-    title: '[DUMMY — REPLACE: Relevant Certification or Award]',
-    year: '[DUMMY — REPLACE: 2023]',
-    description:
-      '[DUMMY — REPLACE: Completed an advanced course or received recognition in a related field.]',
-    type: 'other',
+    title: '2nd Place',
+    event: 'Singapore Amazing Flying Machine Competition 2025',
+    year: 'Mar 2025',
+    description: 'Associated with CAKSA TEAM. Issued by DSO National Laboratories and Science Centre Singapore, in collaboration with the Ministry of Defence.',
+    type: 'competition',
   },
+  {
+    title: 'Project Funding Grantee',
+    event: 'Pekan Kreativitas Mahasiswa – Karsa Cipta 2024',
+    year: 'Dec 2024',
+    description: 'Issued by Balai Pengembangan Talenta Indonesia (BPTI) Pusat Prestasi Nasional (Puspresnas) Kementerian Pendidikan, Kebudayaan, Riset dan Teknologi Republik Indonesia.',
+    type: 'academic',
+  },
+  {
+    title: 'Semi-Finalist',
+    event: 'Singapore Amazing Flying Machine Competition 2024',
+    year: 'Mar 2024',
+    description: 'Associated with CAKSA TEAM. Issued by DSO National Laboratories and Science Centre Singapore, in collaboration with the Ministry of Defence.',
+    type: 'competition',
+  }
 ];
 
 export interface Education {
@@ -40,10 +46,9 @@ export interface Education {
 
 export const education: Education[] = [
   {
-    degree: '[DUMMY — REPLACE: Bachelor of Engineering]',
-    institution: '[DUMMY — REPLACE: University Name]',
-    period: '[DUMMY — REPLACE: 2021–2025]',
-    description:
-      'Focus on robotics and embedded systems, including coursework in control theory, microcontrollers, and autonomous systems.',
-  },
+    degree: 'Bachelor of Applied Engineering, Computer Engineering',
+    institution: 'Politeknik Elektronika Negeri Surabaya',
+    period: '2022 – 2026',
+    description: 'Grade: 3.73 / 4.00',
+  }
 ];
