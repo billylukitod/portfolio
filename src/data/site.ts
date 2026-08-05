@@ -7,14 +7,14 @@ export const site = {
   headline: 'Building autonomous systems from sensors to software.',
   summary:
     'I develop robotics and embedded systems by integrating electronic hardware, real-time firmware, control algorithms, and robotics software into reliable working systems.',
-  email: 'replace-me@example.com',
+  email: 'billylukito.d@gmail.com',
   location: 'Indonesia',
-  siteUrl: 'https://example.com', // REPLACE_ME
-  cvPath: '/cv/CV_REPLACE_ME.pdf',
+  siteUrl: 'https://billylukito.vercel.app',
+  cvPath: '/cv/CV_Billy Lukito.pdf',
   availability: 'Open to engineering roles, research collaboration, and technical projects.',
   social: {
-    github: 'https://github.com/REPLACE_ME',
-    linkedin: 'https://www.linkedin.com/in/REPLACE_ME',
+    github: 'https://github.com/billylukitod',
+    linkedin: 'https://www.linkedin.com/in/billylukitod',
   },
   nav: [
     { label: 'Home', href: '/' },
