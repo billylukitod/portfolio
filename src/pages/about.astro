@@ -73,7 +73,11 @@ import { achievements, education } from '../data/achievements';
             <div class="md:w-3/4">
               <h3 class="text-lg font-bold text-[var(--color-text-primary)]">{exp.role}</h3>
               <p class="text-[var(--color-accent)] font-medium mb-2">{exp.organization}</p>
-              <p class="text-[var(--color-text-secondary)]">{exp.description}</p>
+              <ul class="text-[var(--color-text-secondary)] list-disc list-outside ml-4 space-y-2">
+                {exp.description.map((item) => (
+                  <li class="leading-relaxed">{item}</li>
+                ))}
+              </ul>
             </div>
           </div>
         ))}

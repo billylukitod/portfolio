@@ -192,7 +192,11 @@ const focusAreas = [
                 </span>
               </div>
               <p class="text-sm font-medium text-[var(--color-text-muted)] mb-2">{exp.organization}</p>
-              <p class="text-[var(--color-text-secondary)] leading-relaxed">{exp.description}</p>
+              <ul class="text-[var(--color-text-secondary)] leading-relaxed list-disc list-outside ml-4 space-y-1">
+                {exp.description.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
