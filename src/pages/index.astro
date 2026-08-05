@@ -145,13 +145,13 @@ const focusAreas = [
     <Container>
       <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
         <div class="md:col-span-4 animate-on-scroll">
-          <div class="rounded-[var(--radius-xl)] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface-elevated)]">
+          <div class="rounded-[var(--radius-xl)] overflow-hidden border border-[var(--color-border)] bg-gradient-to-b from-[var(--color-surface-elevated)] to-[var(--color-accent-light)]">
             <img
-              src="/media/profile/photo.svg"
-              alt="Profile photo placeholder"
-              width="300"
-              height="300"
-              class="w-full h-auto"
+              src="/media/profile/photo.png"
+              alt={`${site.name} profile photo`}
+              width="1024"
+              height="876"
+              class="w-full aspect-square object-cover object-top"
               loading="lazy"
             />
           </div>
