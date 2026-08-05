@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
-  <rect width="800" height="450" fill="#e5e7eb"/>
-  <path d="M 350 150 L 450 150 L 450 250 L 350 250 Z" fill="none" stroke="#9ca3af" stroke-width="8"/>
-<circle cx="380" cy="180" r="10" fill="#9ca3af"/><circle cx="420" cy="180" r="10" fill="#9ca3af"/>
-<rect x="380" y="210" width="40" height="10" fill="#9ca3af"/>
-  <text x="50%" y="70%" font-family="system-ui, sans-serif" font-size="24" font-weight="bold" fill="#4b5563" text-anchor="middle" dominant-baseline="middle">Replace with Gallery Image 2</text>
-  <text x="50%" y="80%" font-family="system-ui, sans-serif" font-size="16" fill="#6b7280" text-anchor="middle" dominant-baseline="middle">(Placeholder)</text>
-</svg>

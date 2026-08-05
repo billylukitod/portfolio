@@ -5,24 +5,17 @@ import SectionHeading from '../components/common/SectionHeading.astro';
 import ButtonLink from '../components/common/ButtonLink.astro';
 import SocialLinks from '../components/common/SocialLinks.astro';
 import ProjectCard from '../components/projects/ProjectCard.astro';
-import NoteCard from '../components/notes/NoteCard.astro';
 import IconArrowRight from '../components/icons/IconArrowRight.astro';
 import IconMail from '../components/icons/IconMail.astro';
 import IconLinkedin from '../components/icons/IconLinkedin.astro';
 import { site } from '../data/site';
 import { experiences } from '../data/experience';
 import { getCollection } from 'astro:content';
-import { getReadingTime } from '../utils/dates';
 
 const allProjects = await getCollection('projects', ({ data }) => !data.draft);
 const featuredProjects = allProjects
   .filter((p) => p.data.featured)
   .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
-
-const allNotes = await getCollection('notes', ({ data }) => !data.draft);
-const latestNotes = allNotes
-  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
-  .slice(0, 3);
 
 const focusAreas = [
   {
@@ -227,35 +220,6 @@ const focusAreas = [
     </Container>
   </section>
 
-  <!-- 6. Latest Notes -->
-  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)] bg-[var(--color-surface)]">
-    <Container>
-      <div class="animate-on-scroll flex justify-between items-end mb-10">
-        <SectionHeading title="Latest Notes" />
-        <a
-          href="/notes"
-          class="accent-underline text-[var(--color-accent)] font-medium hidden sm:flex items-center gap-1 group"
-        >
-          All Notes
-          <IconArrowRight size={16} class="group-hover:translate-x-1 transition-transform" />
-        </a>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
-        {latestNotes.map((note) => (
-          <div class="hover-lift">
-            <NoteCard
-              title={note.data.title}
-              slug={note.id}
-              summary={note.data.summary}
-              publishedAt={note.data.publishedAt}
-              tags={note.data.tags}
-              readingTime={getReadingTime(note.body ?? '')}
-            />
-          </div>
-        ))}
-      </div>
-    </Container>
-  </section>
 
   <!-- 7. Contact CTA -->
   <section class="py-[var(--spacing-section)] bg-[var(--color-bg)] text-center">

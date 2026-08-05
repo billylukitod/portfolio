@@ -82,14 +82,6 @@ test.describe('Portfolio Smoke Tests', () => {
     }
   });
 
-  test('notes page loads', async ({ page }) => {
-    await page.goto('/notes');
-    const heading = page.getByRole('heading', { level: 1 });
-    await expect(heading).toBeVisible();
-    // Should have at least 2 notes
-    const noteCards = page.locator('article');
-    expect(await noteCards.count()).toBeGreaterThanOrEqual(2);
-  });
 
   test('contact page has correct links', async ({ page }) => {
     await page.goto('/contact');

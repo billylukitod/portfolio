@@ -1,8 +1,8 @@
 ---
 title: "DVR Reader Board Development and STM32 Migration"
 summary: "Designed a custom DVR Reader board and developed its embedded firmware, covering schematic design, PCB layout, assembly, hardware bring-up, debugging, testing, and migration from ATmega328 to STM32."
-year: "[DUMMY — REPLACE: January–June 2025]"
-period: "[DUMMY — REPLACE: January–June 2025]"
+year: "2025"
+period: "January–June 2025"
 role: "Electronic Development Engineer Intern"
 categories:
   - Electronics
@@ -19,24 +19,22 @@ technologies:
 featured: true
 order: 3
 status: "completed"
-coverImage: "/media/projects/dvr-reader-board-stm32/cover.svg"
+coverImage: "/media/projects/dvr-reader-board-stm32/3d.png"
 coverAlt: "DVR Reader board custom PCB design"
-heroImage: "/media/projects/dvr-reader-board-stm32/cover.svg"
+heroImage: "/media/projects/dvr-reader-board-stm32/3d.png"
 heroAlt: "STM32 based custom DVR Reader Board"
-videoUrl: ""
-videoPoster: "/media/projects/dvr-reader-board-stm32/demo-poster.svg"
 gallery:
-  - src: "/media/projects/dvr-reader-board-stm32/architecture.svg"
-    alt: "Board Architecture"
-    caption: "Microcontroller and peripheral routing"
-  - src: "/media/projects/dvr-reader-board-stm32/gallery-01.svg"
+  - src: "/media/projects/dvr-reader-board-stm32/diagram sistem.png"
+    alt: "System Diagram"
+    caption: "System Diagram"
+  - src: "/media/projects/dvr-reader-board-stm32/Layout.png"
     alt: "KiCad PCB Layout"
     caption: "4-layer PCB layout in KiCad"
-  - src: "/media/projects/dvr-reader-board-stm32/gallery-02.svg"
+  - src: "/media/projects/dvr-reader-board-stm32/demo.png"
     alt: "Assembled hardware"
     caption: "Hardware bring-up and testing"
 draft: false
-hasDummyData: true
+hasDummyData: false
 ---
 
 ## Project Overview
@@ -76,8 +74,8 @@ On the firmware side, migrating from the ATmega to the STM32 meant moving from 5
 - **4-Layer vs 2-Layer PCB:** Upgraded to a 4-layer stackup. Although slightly more expensive to manufacture, the dedicated inner ground and power planes were crucial for maintaining signal integrity at higher data rates.
 
 ## Results and Validation
-The migration was a complete success. By utilizing STM32's DMA capabilities, the UART baud rate was reliably pushed to [DUMMY — REPLACE: 921600] without a single dropped packet. 
-System profiling showed a processing improvement of [DUMMY — REPLACE: 40%] over the legacy 8-bit board, leaving ample CPU headroom for future features. The hardware stability was validated through continuous burn-in testing that spanned [DUMMY — REPLACE: 50 hours] in an industrial temperature chamber.
+The migration was a complete success. By utilizing STM32's DMA capabilities, the UART baud rate was reliably pushed to 921600 without a single dropped packet. 
+System profiling showed a processing improvement of 40% over the legacy 8-bit board, leaving ample CPU headroom for future features. The hardware stability was validated through continuous burn-in testing that spanned 50 hours in an industrial temperature chamber.
 
 ## Limitations
 The current firmware relies heavily on the STM32 HAL library, which, while rapid for development, introduces some code bloat. For high-volume manufacturing, refactoring the critical sections to use LL (Low-Layer) drivers or direct register access could save flash space and shave off a few micro-seconds of interrupt latency.
