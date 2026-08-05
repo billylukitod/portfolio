@@ -45,42 +45,53 @@ const focusAreas = [
 
 <BaseLayout title={site.seo.defaultTitle} description={site.description}>
   <!-- 1. Hero -->
-  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
-    <Container>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+  <section class="relative pt-[calc(var(--spacing-section)*1.5)] pb-[var(--spacing-section)] md:pt-[calc(var(--spacing-section)*2)] md:pb-[calc(var(--spacing-section)*1.5)] overflow-hidden">
+    <!-- Cinematic Full-width Background Image -->
+    <div class="absolute inset-0 z-0 animate-on-scroll">
+      <img
+        src="/media/hero.jpg"
+        alt="Autonomous robotics and embedded systems electronics"
+        width="1920"
+        height="1080"
+        class="w-full h-full object-cover opacity-50 dark:opacity-30 scale-105"
+        loading="eager"
+      />
+      <!-- Gradients to blend image into the background seamlessly -->
+      <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-bg)] via-[var(--color-bg)]/80 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-transparent to-[var(--color-bg)]/50"></div>
+      <!-- Decorative Tech Grid overlay -->
+      <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CgkJPGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz4KCTwvc3ZnPg==')] opacity-30"></div>
+    </div>
+    
+    <Container class="relative z-10">
+      <div class="max-w-3xl">
         <div class="flex flex-col gap-6">
-          <p class="animate-hero-eyebrow text-[var(--color-accent)] font-mono text-sm tracking-wide uppercase font-semibold">
-            {site.eyebrow}
-          </p>
-          <h1 class="animate-hero-heading font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-[var(--color-text-primary)]">
+          <div class="animate-hero-eyebrow flex items-center gap-2">
+            <span class="inline-block w-2 h-2 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent)]"></span>
+            <p class="text-[var(--color-accent)] font-mono text-sm tracking-widest uppercase font-bold">
+              {site.eyebrow}
+            </p>
+          </div>
+          <h1 class="animate-hero-heading font-display text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] text-[var(--color-text-primary)]">
             {site.headline}
           </h1>
-          <p class="animate-hero-summary text-xl text-[var(--color-text-secondary)] max-w-2xl leading-relaxed">
+          <p class="animate-hero-summary text-xl md:text-2xl text-[var(--color-text-secondary)] max-w-2xl leading-relaxed">
             {site.summary}
           </p>
-          <div class="animate-hero-cta flex flex-wrap gap-4 mt-2">
-            <ButtonLink href={site.heroCtaPrimary.href} variant="primary">
+          <div class="animate-hero-cta flex flex-wrap gap-4 mt-4">
+            <ButtonLink href={site.heroCtaPrimary.href} variant="primary" class="px-8 py-4 text-lg">
               {site.heroCtaPrimary.label}
-              <IconArrowRight size={16} class="ml-2 inline" />
+              <IconArrowRight size={20} class="ml-2 inline" />
             </ButtonLink>
-            <ButtonLink href={site.heroCtaSecondary.href} variant="secondary">
+            <ButtonLink href={site.heroCtaSecondary.href} variant="secondary" class="px-8 py-4 text-lg backdrop-blur-sm bg-[var(--color-surface)]/50">
               {site.heroCtaSecondary.label}
             </ButtonLink>
           </div>
-          <div class="animate-hero-social mt-2 flex items-center gap-4">
-            <span class="text-[var(--color-text-muted)] text-sm font-medium">Connect:</span>
+          <div class="animate-hero-social mt-6 flex items-center gap-4">
+            <span class="text-[var(--color-text-muted)] text-sm font-medium tracking-wide uppercase">Connect</span>
+            <div class="h-px w-8 bg-[var(--color-border)]"></div>
             <SocialLinks />
           </div>
-        </div>
-        <div class="animate-hero-image rounded-[var(--radius-xl)] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface-elevated)]">
-          <img
-            src="/media/projects/ackermann-adaptive-cruise-control/cover.svg"
-            alt="Autonomous system engineering visualization"
-            width="800"
-            height="450"
-            class="w-full h-auto object-cover"
-            loading="eager"
-          />
         </div>
       </div>
     </Container>

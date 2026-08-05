@@ -5,6 +5,7 @@ import ThemeToggle from './ThemeToggle.astro';
 import IconMenu from '../icons/IconMenu.astro';
 import IconX from '../icons/IconX.astro';
 import IconFileText from '../icons/IconFileText.astro';
+import IconArrowLeft from '../icons/IconArrowLeft.astro';
 
 const currentPath = Astro.url.pathname;
 
@@ -21,7 +22,17 @@ function isActive(href: string): boolean {
   <Container wide>
     <div class="flex items-center justify-between h-16">
       <!-- Left side: Site name & Controls -->
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-3 md:gap-4">
+        {currentPath !== '/' && (
+          <button 
+            type="button" 
+            onclick="window.history.length > 1 ? window.history.back() : window.location.href='/';" 
+            aria-label="Go back" 
+            class="p-1.5 -ml-2 rounded-[var(--radius-md)] hover:bg-[var(--color-surface-elevated)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors hidden md:block"
+          >
+            <IconArrowLeft size={20} />
+          </button>
+        )}
         <a
           href="/"
           class="text-lg font-bold text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors no-underline"
