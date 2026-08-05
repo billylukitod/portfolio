@@ -4,6 +4,7 @@ export interface Achievement {
   year: string;
   description: string;
   type: 'competition' | 'academic' | 'certification' | 'other';
+  certificateUrl?: string;
 }
 
 export const achievements: Achievement[] = [
@@ -14,6 +15,7 @@ export const achievements: Achievement[] = [
     description:
       'Associated with CAKSA TEAM. Issued by DSO National Laboratories and Science Centre Singapore, in collaboration with the Ministry of Defence.',
     type: 'competition',
+    certificateUrl: '/media/certificates/SAFMC 2025.pdf',
   },
   {
     title: 'Semi-Finalist',
@@ -22,6 +24,7 @@ export const achievements: Achievement[] = [
     description:
       'Associated with CAKSA TEAM. Issued by DSO National Laboratories and Science Centre Singapore, in collaboration with the Ministry of Defence.',
     type: 'competition',
+    certificateUrl: '/media/certificates/SAFMC 2024.pdf',
   },
   {
     title: 'Project Funding Grantee',
@@ -30,6 +33,7 @@ export const achievements: Achievement[] = [
     description:
       'Issued by Balai Pengembangan Talenta Indonesia (BPTI) Pusat Prestasi Nasional (Puspresnas) Kementerian Pendidikan, Kebudayaan, Riset dan Teknologi Republik Indonesia.',
     type: 'academic',
+    certificateUrl: '/media/certificates/PKM 2025.pdf',
   },
   {
     title: 'Project Funding Grantee',
@@ -38,6 +42,7 @@ export const achievements: Achievement[] = [
     description:
       'Issued by Balai Pengembangan Talenta Indonesia (BPTI) Pusat Prestasi Nasional (Puspresnas) Kementerian Pendidikan, Kebudayaan, Riset dan Teknologi Republik Indonesia.',
     type: 'academic',
+    certificateUrl: '/media/certificates/PKM 2024.pdf',
   },
 ];
 
