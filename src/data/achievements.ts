@@ -8,13 +8,6 @@ export interface Achievement {
 
 export const achievements: Achievement[] = [
   {
-    title: 'Project Funding Grantee',
-    event: 'Pekan Kreativitas Mahasiswa – Karsa Cipta 2025',
-    year: 'Dec 2025',
-    description: 'Issued by Balai Pengembangan Talenta Indonesia (BPTI) Pusat Prestasi Nasional (Puspresnas) Kementerian Pendidikan, Kebudayaan, Riset dan Teknologi Republik Indonesia.',
-    type: 'academic',
-  },
-  {
     title: '2nd Place',
     event: 'Singapore Amazing Flying Machine Competition 2025',
     year: 'Mar 2025',
@@ -22,18 +15,25 @@ export const achievements: Achievement[] = [
     type: 'competition',
   },
   {
-    title: 'Project Funding Grantee',
-    event: 'Pekan Kreativitas Mahasiswa – Karsa Cipta 2024',
-    year: 'Dec 2024',
-    description: 'Issued by Balai Pengembangan Talenta Indonesia (BPTI) Pusat Prestasi Nasional (Puspresnas) Kementerian Pendidikan, Kebudayaan, Riset dan Teknologi Republik Indonesia.',
-    type: 'academic',
-  },
-  {
     title: 'Semi-Finalist',
     event: 'Singapore Amazing Flying Machine Competition 2024',
     year: 'Mar 2024',
     description: 'Associated with CAKSA TEAM. Issued by DSO National Laboratories and Science Centre Singapore, in collaboration with the Ministry of Defence.',
     type: 'competition',
+  },
+  {
+    title: 'Project Funding Grantee',
+    event: 'Pekan Kreativitas Mahasiswa – Karsa Cipta 2025',
+    year: 'Dec 2025',
+    description: 'Issued by Balai Pengembangan Talenta Indonesia (BPTI) Pusat Prestasi Nasional (Puspresnas) Kementerian Pendidikan, Kebudayaan, Riset dan Teknologi Republik Indonesia.',
+    type: 'academic',
+  },
+  {
+    title: 'Project Funding Grantee',
+    event: 'Pekan Kreativitas Mahasiswa – Karsa Cipta 2024',
+    year: 'Dec 2024',
+    description: 'Issued by Balai Pengembangan Talenta Indonesia (BPTI) Pusat Prestasi Nasional (Puspresnas) Kementerian Pendidikan, Kebudayaan, Riset dan Teknologi Republik Indonesia.',
+    type: 'academic',
   }
 ];
 

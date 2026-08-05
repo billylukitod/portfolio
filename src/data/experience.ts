@@ -18,6 +18,17 @@ export const experiences: Experience[] = [
     ],
     current: false,
   },
+    {
+    role: 'Electronic Development Engineer',
+    organization: 'PT Infoglobal Teknologi Semesta · Internship',
+    period: 'Jan 2025 – Jun 2025 · 6 mos',
+    description: [
+      'Supported embedded system development and testing for DVR platform projects.',
+      'Contributed to microcontroller migration from ATmega328 to STM32, including integration and validation support.',
+      'Performed hardware debugging, system troubleshooting, validation checks, and technical documentation/reporting.'
+    ],
+    current: false,
+  },
   {
     role: 'Co-Leader and Head of Electrical Engineer',
     organization: 'CAKSA TEAM',
@@ -37,17 +48,6 @@ export const experiences: Experience[] = [
       'Integrated microcontrollers, sensors, actuators, and motor control components for autonomous robot/UAV system development.',
       'Supported electrical wiring, embedded system prototyping, hardware debugging, and functional validation to improve system reliability.',
       'Contributed to technical preparation for SAFMC 2024 D1 Man-Machine, supporting the team\'s semi-finlist achievement in Singapore.'
-    ],
-    current: false,
-  },
-  {
-    role: 'Electronic Development Engineer',
-    organization: 'PT Infoglobal Teknologi Semesta · Internship',
-    period: 'Jan 2025 – Jun 2025 · 6 mos',
-    description: [
-      'Supported embedded system development and testing for DVR platform projects.',
-      'Contributed to microcontroller migration from ATmega328 to STM32, including integration and validation support.',
-      'Performed hardware debugging, system troubleshooting, validation checks, and technical documentation/reporting.'
     ],
     current: false,
   }
