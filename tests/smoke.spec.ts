@@ -21,6 +21,11 @@ test.describe('Portfolio Smoke Tests', () => {
     await expect(page).toHaveURL(/\/projects/);
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
 
+    // Test Notes link
+    await page.getByRole('navigation', { name: /main/i }).getByRole('link', { name: 'Notes' }).click();
+    await expect(page).toHaveURL(/\/notes/);
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+
     // Test Contact link
     await page.getByRole('navigation', { name: /main/i }).getByRole('link', { name: 'Contact' }).click();
     await expect(page).toHaveURL(/\/contact/);
