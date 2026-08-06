@@ -8,10 +8,10 @@ export const site = {
   summary:
     'I develop robotics and embedded systems by integrating electronic hardware, real-time firmware, control algorithms, and robotics software into reliable working systems.',
   email: 'billylukito.d@gmail.com',
-  location: 'Indonesia',
+  location: 'Surabaya, Indonesia',
   siteUrl: 'https://billylukito.vercel.app',
   cvPath: '/cv/CV_Billy Lukito.pdf',
-  availability: 'Open to engineering roles, research collaboration, and technical projects.',
+  availability: 'Open to full-time engineering opportunities',
   social: {
     github: 'https://github.com/billylukitod',
     linkedin: 'https://www.linkedin.com/in/billylukitod',

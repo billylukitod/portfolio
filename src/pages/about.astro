@@ -159,13 +159,53 @@ import { achievements, education } from '../data/achievements';
       <div class="animate-on-scroll">
         <SectionHeading title="Skills & Tools" />
       </div>
-      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
-        {skillGroups.map((group) => (
-          <div class="hover-lift p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)]">
-            <h3 class="text-lg font-semibold text-[var(--color-text-primary)] mb-4">{group.category}</h3>
-            <TechnologyTags technologies={group.skills} />
-          </div>
-        ))}
+
+      {/* Core */}
+      <div class="mt-10 animate-on-scroll">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-[var(--color-accent)]/10 text-[var(--color-accent)] border border-[var(--color-accent)]/20">Core</span>
+          <span class="text-sm text-[var(--color-text-muted)]">Technologies I've built multiple projects with</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
+          {skillGroups.filter(g => g.level === 'core').map((group) => (
+            <div class="hover-lift p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)]">
+              <h3 class="text-lg font-semibold text-[var(--color-text-primary)] mb-4">{group.category}</h3>
+              <TechnologyTags technologies={group.skills} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Working Knowledge */}
+      <div class="mt-10 animate-on-scroll">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-blue-500/10 text-blue-500 border border-blue-500/20">Working Knowledge</span>
+          <span class="text-sm text-[var(--color-text-muted)]">Used meaningfully in specific projects</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
+          {skillGroups.filter(g => g.level === 'working').map((group) => (
+            <div class="hover-lift p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)]">
+              <h3 class="text-lg font-semibold text-[var(--color-text-primary)] mb-4">{group.category}</h3>
+              <TechnologyTags technologies={group.skills} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Familiar */}
+      <div class="mt-10 animate-on-scroll">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20">Familiar</span>
+          <span class="text-sm text-[var(--color-text-muted)]">Currently exploring and building proficiency</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
+          {skillGroups.filter(g => g.level === 'familiar').map((group) => (
+            <div class="hover-lift p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)]">
+              <h3 class="text-lg font-semibold text-[var(--color-text-primary)] mb-4">{group.category}</h3>
+              <TechnologyTags technologies={group.skills} />
+            </div>
+          ))}
+        </div>
       </div>
     </Container>
   </section>
