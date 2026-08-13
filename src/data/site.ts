@@ -3,7 +3,7 @@ export const site = {
   shortName: 'Billy Lukito Danuharja',
   title: 'Robotics & Embedded Systems Engineer',
   description:
-    'Focused on autonomous systems, intelligent control, and hardware–software integration.',
+    'Billy Lukito Danuharja is a Robotics & Embedded Systems Engineer focused on embedded systems, autonomous systems, STM32, ROS, robotics, and hardware-software integration.',
   headline: 'Building autonomous systems from sensors to software.',
   summary:
     'I develop robotics and embedded systems by integrating electronic hardware, real-time firmware, control algorithms, and robotics software into reliable working systems.',
@@ -24,10 +24,10 @@ export const site = {
     { label: 'Contact', href: '/contact' },
   ],
   seo: {
-    defaultTitle: 'Robotics & Embedded Systems Engineer',
+    defaultTitle: 'Billy Lukito Danuharja | Robotics & Embedded Systems Engineer',
     titleTemplate: '%s | Billy Lukito Danuharja',
     defaultDescription:
-      'Focused on autonomous systems, intelligent control, and hardware–software integration.',
+      'Billy Lukito Danuharja is a Robotics & Embedded Systems Engineer focused on embedded systems, autonomous systems, STM32, ROS, robotics, and hardware-software integration.',
     defaultImage: '/social-card-default.png',
     twitterHandle: '',
   },

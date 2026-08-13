@@ -6,7 +6,7 @@ import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com', // REPLACE_ME: Set your production domain
+  site: 'https://billylukito.vercel.app',
   integrations: [sitemap(), mdx()],
   vite: {
     plugins: [tailwindcss()],

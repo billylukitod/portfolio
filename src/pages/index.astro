@@ -52,18 +52,23 @@ const focusAreas = [
       
       <!-- Content Overlay -->
       <div class="relative z-10 flex flex-col items-center text-center px-4 max-w-4xl mx-auto">
-        <!-- Eyebrow Badge -->
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-sm border border-gray-700/50 mb-8 animate-hero-eyebrow">
-          <span class="inline-block w-2 h-2 rounded-full bg-[var(--color-accent)] pulse-dot"></span>
-          <span class="text-sm font-medium tracking-wide text-white uppercase">{site.eyebrow}</span>
+        <!-- Semantic SEO Structure: H1 (Name), P (Profession), H2 (Headline) -->
+        <div class="animate-hero-eyebrow flex flex-col items-center gap-3 mb-8">
+          <h1 class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-sm border border-gray-700/50">
+            <span class="inline-block w-2 h-2 rounded-full bg-[var(--color-accent)] pulse-dot"></span>
+            <span class="text-sm font-medium tracking-wide text-white uppercase">{site.name}</span>
+          </h1>
+          <p class="text-sm md:text-base font-semibold tracking-widest text-[#F58A07] uppercase">
+            {site.title}
+          </p>
         </div>
         
-        <!-- Heading -->
-        <h1 
+        <!-- Headline -->
+        <h2 
           class="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white mb-6 animate-hero-heading"
-          set:html={site.headline.replace(site.name, `<span class="text-[#F58A07]">${site.name}</span>`)}
+          set:html={site.headline}
         >
-        </h1>
+        </h2>
         
         <p class="text-xl md:text-2xl text-gray-300 max-w-2xl leading-relaxed mb-8 animate-hero-summary">
           {site.summary}
@@ -153,7 +158,7 @@ const focusAreas = [
     <div class="absolute inset-0 z-0">
       <img 
         src="/media/about-action.jpg" 
-        alt="Working on drone" 
+        alt="Billy Lukito Danuharja working on an embedded systems prototype" 
         class="w-full h-full object-cover opacity-50 grayscale"
       />
       <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-[var(--color-bg)]/40 to-[var(--color-bg)]"></div>

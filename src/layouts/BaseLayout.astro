@@ -32,12 +32,15 @@ const {
 
 const personJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: site.name,
-  jobTitle: site.title,
-  description: site.description,
-  url: site.siteUrl,
-  sameAs: [site.social.github, site.social.linkedin].filter(Boolean),
+  '@type': 'ProfilePage',
+  mainEntity: {
+    '@type': 'Person',
+    name: site.name,
+    jobTitle: site.title,
+    description: site.description,
+    url: site.siteUrl,
+    sameAs: [site.social.github, site.social.linkedin].filter(Boolean),
+  }
 };
 ---
 
