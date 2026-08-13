@@ -1,6 +1,6 @@
 export const site = {
   name: 'Billy Lukito Danuharja',
-  shortName: 'Billy',
+  shortName: 'Billy Lukito Danuharja',
   title: 'Robotics & Embedded Systems Engineer',
   description:
     'Focused on autonomous systems, intelligent control, and hardware–software integration.',
@@ -41,7 +41,7 @@ export const site = {
     linkedinLabel: 'Connect on LinkedIn',
   },
   aboutBio: [
-    'I am a robotics and embedded systems engineer passionate about creating intelligent machines that interact with the physical world. I specialize in the complete stack—from designing custom PCBs and writing low-level firmware to developing high-level control algorithms and integrating robot operating systems.',
+    'Hi, I am Billy. I am a robotics and embedded systems engineer passionate about creating intelligent machines that interact with the physical world. I specialize in the complete stack—from designing custom PCBs and writing low-level firmware to developing high-level control algorithms and integrating robot operating systems.',
     'My work spans control-system development, real-time operating systems, sensor fusion, and autonomous navigation. I thrive in bridging the gap between hardware constraints and software capabilities to build robust, reliable systems.',
   ],
   aboutPhilosophy:

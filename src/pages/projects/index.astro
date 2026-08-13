@@ -9,12 +9,19 @@ const sortedProjects = projects.sort((a, b) => (a.data.order ?? 99) - (b.data.or
 ---
 
 <BaseLayout title="Projects" description="Engineering projects spanning robotics, embedded systems, UAV, and control systems.">
-  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
+  <section class="pt-32 pb-[var(--spacing-section-sm)] md:pb-[var(--spacing-section)] bg-[#0a0a0a] min-h-screen">
     <Container>
-      <div class="mb-12 animate-hero-heading">
-        <h1 class="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-4 font-display">Projects</h1>
-        <p class="text-xl text-[var(--color-text-secondary)] max-w-2xl animate-hero-summary">
-          Selected work spanning robotics, embedded systems, electronics, and control systems.
+      <div class="mb-16 animate-hero-heading flex flex-col items-center text-center">
+        <h1 class="text-5xl md:text-6xl font-black text-white mb-6 font-display uppercase tracking-tight">
+          Selected <span class="text-[var(--color-accent)]">Works</span>
+        </h1>
+        <div class="flex items-center gap-4 mb-6">
+          <div class="h-1 w-12 bg-[var(--color-accent)]"></div>
+          <div class="h-2 w-2 rounded-full bg-[var(--color-accent)]"></div>
+          <div class="h-1 w-12 bg-[var(--color-accent)]"></div>
+        </div>
+        <p class="text-xl text-[var(--color-text-secondary)] max-w-2xl animate-hero-summary font-light">
+          Engineering projects spanning robotics, embedded systems, electronics, and control systems.
         </p>
       </div>
 

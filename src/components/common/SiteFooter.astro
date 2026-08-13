@@ -6,26 +6,41 @@ import Container from './Container.astro';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="mt-auto border-t border-[var(--color-border)] bg-[var(--color-surface)] py-8">
+<footer class="mt-auto border-t-2 border-[#F58A07] bg-black py-12 px-6 text-white">
   <Container>
-    <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
-      <div class="flex flex-col items-center gap-1 sm:items-start">
-        <span class="text-sm font-semibold text-[var(--color-text-primary)]">{site.name}</span>
-        <p class="text-sm text-[var(--color-text-muted)]">
-          &copy; {currentYear} {site.name}. All rights reserved.
-        </p>
+    <div class="flex flex-col items-center justify-between gap-8 md:flex-row md:items-start">
+      <div class="flex flex-col items-center text-center md:items-start md:text-left gap-2 max-w-sm">
+        <span class="text-xl font-bold font-display text-white">{site.name}</span>
+        {site.description && (
+          <p class="text-sm text-gray-400">
+            {site.description}
+          </p>
+        )}
       </div>
 
-      <div class="flex items-center gap-6">
-        <SocialLinks size={20} />
-        <a
-          href="#main-content"
-          class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors no-underline hidden sm:block"
-          aria-label="Back to top"
-        >
-          &uarr; Top
-        </a>
+      <div class="flex flex-col items-center md:items-end gap-4">
+        <div class="flex items-center gap-4 text-white hover:text-[#F58A07]">
+          <div class="social-links-wrapper">
+            <SocialLinks size={24} />
+          </div>
+        </div>
       </div>
+    </div>
+    
+    <div class="mt-12 pt-8 border-t border-white/10 text-center">
+      <p class="text-sm text-gray-500">
+        &copy; {currentYear} {site.name}. All rights reserved.
+      </p>
     </div>
   </Container>
 </footer>
+
+<style is:global>
+  .social-links-wrapper a {
+    color: white !important;
+    transition: color 0.2s ease;
+  }
+  .social-links-wrapper a:hover {
+    color: #F58A07 !important;
+  }
+</style>

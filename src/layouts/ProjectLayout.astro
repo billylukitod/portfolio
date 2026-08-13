@@ -72,36 +72,61 @@ const jsonLd = {
 ---
 
 <BaseLayout title={title} description={seoDescription || summary} jsonLd={jsonLd}>
-  <article>
-    <ProjectHero
-      title={title}
-      summary={summary}
-      coverImage={heroImage || coverImage}
-      coverAlt={heroAlt || coverAlt}
-      hasDummyData={hasDummyData}
-    />
+<article class="bg-[#0a0a0a] min-h-screen">
+    <!-- Full-width hero area -->
+    <div class="relative w-full min-h-[70vh] flex flex-col justify-end pt-[140px] border-b border-[#222]">
+      <div class="absolute inset-0 bg-[#0a0a0a] z-0">
+        <img 
+          src={heroImage || coverImage} 
+          alt={heroAlt || coverAlt} 
+          class="w-full h-full object-cover opacity-60"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/80 to-transparent"></div>
+      </div>
+      
+      <Container class="relative z-10 w-full">
+        <div class="pb-12 md:pb-16 max-w-4xl">
+          {hasDummyData && (
+            <div class="mb-4 inline-block">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20">
+                Sample Content
+              </span>
+            </div>
+          )}
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-black font-display text-white mb-6 uppercase tracking-tight leading-tight">
+            {title}
+          </h1>
+          <p class="text-lg md:text-xl text-[var(--color-text-secondary)] font-light border-l-4 border-[var(--color-accent)] pl-4 py-1 max-w-3xl">
+            {summary}
+          </p>
+        </div>
+      </Container>
+    </div>
 
-    <div class="py-8 md:py-12">
+    <div class="py-12 md:py-20 bg-[#0a0a0a]">
       <Container>
-        <div class="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 lg:gap-12">
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-12 lg:gap-16">
           <!-- Main content -->
-          <div class="animate-on-scroll prose-custom min-w-0">
+          <div class="animate-on-scroll prose-custom max-w-none">
             <slot />
 
             {gallery && gallery.length > 0 && (
-              <section class="mt-12 not-prose">
-                <h2 class="text-xl font-semibold text-[var(--color-text-primary)] mb-6">
-                  Gallery
-                </h2>
+              <section class="mt-16 not-prose border-t border-[#222] pt-12">
+                <div class="flex items-center gap-4 mb-8">
+                  <h2 class="text-3xl font-black font-display text-white uppercase">Gallery</h2>
+                  <div class="h-1 flex-grow bg-gradient-to-r from-[var(--color-accent)] to-transparent"></div>
+                </div>
                 <ProjectGallery images={gallery} />
               </section>
             )}
 
             {videoUrl && (
-              <section class="mt-12 not-prose">
-                <h2 class="text-xl font-semibold text-[var(--color-text-primary)] mb-6">
-                  Video Demo
-                </h2>
+              <section class="mt-16 not-prose border-t border-[#222] pt-12">
+                <div class="flex items-center gap-4 mb-8">
+                  <h2 class="text-3xl font-black font-display text-white uppercase">Demo</h2>
+                  <div class="h-1 flex-grow bg-gradient-to-r from-[#084887] to-transparent"></div>
+                </div>
                 <VideoEmbed url={videoUrl} poster={videoPoster} title={`${title} demo`} />
               </section>
             )}
@@ -109,7 +134,7 @@ const jsonLd = {
 
           <!-- Sidebar -->
           <aside class="lg:order-last animate-on-scroll">
-            <div class="sticky top-24 space-y-6">
+            <div class="sticky top-32 space-y-8 bg-[#121212] p-6 rounded-2xl border border-[#222]">
               <ProjectMeta
                 role={role}
                 period={period || year}
@@ -118,9 +143,10 @@ const jsonLd = {
                 repositoryUrl={repositoryUrl}
                 liveUrl={liveUrl}
               />
-              <div>
-                <h3 class="text-sm font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider mb-3">
-                  Technologies
+              <div class="pt-6 border-t border-[#333]">
+                <h3 class="text-sm font-bold text-white uppercase tracking-widest mb-4 flex items-center gap-2">
+                  <span class="w-4 h-1 bg-[var(--color-accent)] inline-block"></span>
+                  Tech Stack
                 </h3>
                 <TechnologyTags technologies={technologies} />
               </div>
@@ -130,6 +156,8 @@ const jsonLd = {
       </Container>
     </div>
 
-    <ProjectNavigation prev={prevProject} next={nextProject} />
+    <div class="bg-[#121212] border-t border-[#222]">
+      <ProjectNavigation prev={prevProject} next={nextProject} />
+    </div>
   </article>
 </BaseLayout>

@@ -1,11 +1,8 @@
 ---
 import { site } from '../../data/site';
-import Container from '../common/Container.astro';
-import ThemeToggle from './ThemeToggle.astro';
 import IconMenu from '../icons/IconMenu.astro';
 import IconX from '../icons/IconX.astro';
 import IconFileText from '../icons/IconFileText.astro';
-import IconArrowLeft from '../icons/IconArrowLeft.astro';
 
 const currentPath = Astro.url.pathname;
 
@@ -16,69 +13,57 @@ function isActive(href: string): boolean {
 ---
 
 <header
-  class="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-surface)]/95 backdrop-blur-sm supports-[backdrop-filter]:bg-[var(--color-surface)]/80"
+  class="fixed top-5 left-4 right-4 md:left-8 md:right-8 lg:left-10 lg:right-10 z-50 bg-[#121212]/60 backdrop-blur-md border border-white/10 rounded-xl"
   role="banner"
 >
-  <Container wide>
+  <div class="px-4 md:px-6">
     <div class="flex items-center justify-between h-16">
       <!-- Left side: Site name & Controls -->
-      <div class="flex items-center gap-3 md:gap-4">
-        {currentPath !== '/' && (
-          <button 
-            type="button" 
-            onclick="window.history.length > 1 ? window.history.back() : window.location.href='/';" 
-            aria-label="Go back" 
-            class="p-1.5 -ml-2 rounded-[var(--radius-md)] hover:bg-[var(--color-surface-elevated)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors hidden md:block"
-          >
-            <IconArrowLeft size={20} />
-          </button>
-        )}
+      <div class="flex items-center gap-4">
         <a
           href="/"
-          class="text-lg font-bold text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors no-underline"
+          class="text-xl font-bold text-white font-display hover:text-[var(--color-accent)] transition-colors no-underline"
           aria-label={`${site.name} — Home`}
         >
           {site.shortName || site.name}
         </a>
 
-        <!-- Desktop Controls -->
-        <div class="hidden md:flex items-center gap-2 pl-4 border-l border-[var(--color-border)]">
-          <ThemeToggle />
-          <a
-            href="/cv"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-[var(--color-accent-contrast)] bg-[var(--color-accent)] rounded-[var(--radius-md)] hover:bg-[var(--color-accent-hover)] transition-colors no-underline"
-          >
-            <IconFileText size={14} />
-            CV
-          </a>
-        </div>
       </div>
 
       <!-- Right side: Desktop navigation -->
-      <nav class="hidden md:flex items-center gap-1" aria-label="Main navigation">
-        {site.nav.map((item) => (
-          <a
-            href={item.href}
-            class:list={[
-              'px-3 py-2 text-sm font-medium rounded-[var(--radius-md)] transition-colors no-underline',
-              isActive(item.href)
-                ? 'text-[var(--color-accent)] bg-[var(--color-accent-light)]'
-                : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface-elevated)]',
-            ]}
-            aria-current={isActive(item.href) ? 'page' : undefined}
-          >
-            {item.label}
-          </a>
-        ))}
-      </nav>
+      <div class="hidden md:flex items-center gap-6">
+        <nav class="flex items-center gap-6" aria-label="Main navigation">
+          {site.nav.map((item) => (
+            <a
+              href={item.href}
+              class:list={[
+                'text-sm font-semibold transition-colors no-underline',
+                isActive(item.href)
+                  ? 'text-[#F58A07]'
+                  : 'text-white hover:text-[#F58A07]',
+              ]}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+        
+        <a
+          href="/cv"
+          class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-[#F58A07] rounded-md hover:bg-[#d97405] transition-colors no-underline"
+        >
+          <IconFileText size={16} />
+          CV
+        </a>
+      </div>
 
       <!-- Mobile controls -->
-      <div class="flex items-center gap-2 md:hidden">
-        <ThemeToggle />
+      <div class="flex items-center gap-4 md:hidden">
         <button
           type="button"
           id="mobile-menu-button"
-          class="p-2 rounded-[var(--radius-md)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface-elevated)] transition-colors"
+          class="p-2 rounded-md text-white hover:text-[#F58A07] transition-colors"
           aria-expanded="false"
           aria-controls="mobile-menu"
           aria-label="Open menu"
@@ -88,43 +73,43 @@ function isActive(href: string): boolean {
         </button>
       </div>
     </div>
-  </Container>
+  </div>
 
   <!-- Mobile menu -->
   <div
     id="mobile-menu"
-    class="md:hidden hidden border-t border-[var(--color-border)]"
+    class="hidden md:hidden border-t border-white/10 bg-[#121212]/90 backdrop-blur-md rounded-b-xl"
     role="dialog"
     aria-modal="true"
     aria-label="Mobile navigation"
   >
-    <Container>
-      <nav class="py-4 space-y-1" aria-label="Mobile navigation">
+    <div class="px-4 py-4 space-y-2">
+      <nav class="flex flex-col space-y-1" aria-label="Mobile navigation">
         {site.nav.map((item) => (
           <a
             href={item.href}
             class:list={[
-              'block px-3 py-2.5 text-base font-medium rounded-[var(--radius-md)] transition-colors no-underline',
+              'block px-3 py-2 text-base font-semibold rounded-md transition-colors no-underline',
               isActive(item.href)
-                ? 'text-[var(--color-accent)] bg-[var(--color-accent-light)]'
-                : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface-elevated)]',
+                ? 'text-[#F58A07]'
+                : 'text-white hover:text-[#F58A07]',
             ]}
             aria-current={isActive(item.href) ? 'page' : undefined}
           >
             {item.label}
           </a>
         ))}
-        <div class="pt-2 border-t border-[var(--color-border)] mt-2">
-          <a
-            href="/cv"
-            class="inline-flex items-center gap-1.5 px-3 py-2.5 text-base font-medium text-[var(--color-accent)] no-underline"
-          >
-            <IconFileText size={16} />
-            View CV
-          </a>
-        </div>
       </nav>
-    </Container>
+      <div class="pt-4 border-t border-white/10">
+        <a
+          href="/cv"
+          class="inline-flex w-full justify-center items-center gap-2 px-4 py-2 text-base font-semibold text-white bg-[#F58A07] rounded-md hover:bg-[#d97405] transition-colors no-underline"
+        >
+          <IconFileText size={18} />
+          View CV
+        </a>
+      </div>
+    </div>
   </div>
 </header>
 

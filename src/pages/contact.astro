@@ -11,90 +11,95 @@ import { site } from '../data/site';
 ---
 
 <BaseLayout title="Contact" description="Get in touch for engineering roles, research collaboration, and technical projects.">
-  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
+  <section class="pt-32 pb-[var(--spacing-section-sm)] md:pb-[var(--spacing-section)] bg-[#0a0a0a] min-h-screen flex flex-col justify-center">
     <Container>
-      <div class="max-w-2xl mx-auto">
-        <h1 class="animate-hero-heading font-display text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-6 text-center">
-          Get in Touch
+      <div class="max-w-3xl mx-auto">
+        <h1 class="animate-hero-heading font-display text-5xl md:text-7xl font-black text-white mb-6 text-center uppercase tracking-tighter">
+          Let's <span class="text-[var(--color-accent)]">Connect</span>
         </h1>
 
-        <div class="text-center mb-12 animate-hero-summary">
-          <p class="text-lg text-[var(--color-text-secondary)] leading-relaxed mb-4">
+        <div class="text-center mb-16 animate-hero-summary">
+          <p class="text-xl text-[var(--color-text-secondary)] leading-relaxed mb-4 font-light">
             {site.availability}
           </p>
-          <p class="text-[var(--color-text-muted)] flex items-center justify-center gap-2">
-            <IconMapPin size={16} />
+          <p class="text-[#084887] font-semibold flex items-center justify-center gap-2 text-lg">
+            <IconMapPin size={20} />
             {site.location}
           </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12 stagger-children">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16 stagger-children">
           <a
             href={`mailto:${site.email}`}
-            class="hover-lift flex items-center gap-3 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors no-underline"
+            class="hover-lift flex items-center gap-4 p-6 rounded-2xl border border-[#222] bg-[#121212] hover:border-[var(--color-accent)] transition-all duration-300 no-underline group"
           >
-            <div class="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--color-accent-light)] flex items-center justify-center">
-              <IconMail size={20} class="text-[var(--color-accent)]" />
+            <div class="w-12 h-12 rounded-xl bg-[var(--color-accent)]/10 flex items-center justify-center group-hover:bg-[var(--color-accent)] transition-colors duration-300">
+              <IconMail size={24} class="text-[var(--color-accent)] group-hover:text-[#0a0a0a] transition-colors" />
             </div>
-            <div>
-              <div class="text-sm font-medium text-[var(--color-text-primary)]">{site.contactCta.emailLabel}</div>
-              <div class="text-xs text-[var(--color-text-muted)]">{site.email}</div>
+            <div class="flex-grow">
+              <div class="text-lg font-bold text-white">{site.contactCta.emailLabel}</div>
+              <div class="text-sm text-[var(--color-text-muted)] group-hover:text-white transition-colors">{site.email}</div>
             </div>
+            <div class="text-[var(--color-accent)] transition-transform duration-300 group-hover:rotate-45">↗</div>
           </a>
 
           <a
             href={site.social.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            class="hover-lift flex items-center gap-3 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors no-underline"
+            class="hover-lift flex items-center gap-4 p-6 rounded-2xl border border-[#222] bg-[#121212] hover:border-[#084887] transition-all duration-300 no-underline group"
           >
-            <div class="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--color-accent-light)] flex items-center justify-center">
-              <IconLinkedin size={20} class="text-[var(--color-accent)]" />
+            <div class="w-12 h-12 rounded-xl bg-[#084887]/10 flex items-center justify-center group-hover:bg-[#084887] transition-colors duration-300">
+              <IconLinkedin size={24} class="text-[#084887] group-hover:text-white transition-colors" />
             </div>
-            <div>
-              <div class="text-sm font-medium text-[var(--color-text-primary)]">{site.contactCta.linkedinLabel}</div>
-              <div class="text-xs text-[var(--color-text-muted)]">LinkedIn Profile</div>
+            <div class="flex-grow">
+              <div class="text-lg font-bold text-white">{site.contactCta.linkedinLabel}</div>
+              <div class="text-sm text-[var(--color-text-muted)] group-hover:text-white transition-colors">LinkedIn Profile</div>
             </div>
+            <div class="text-[#084887] transition-transform duration-300 group-hover:rotate-45">↗</div>
           </a>
 
           <a
             href={site.social.github}
             target="_blank"
             rel="noopener noreferrer"
-            class="hover-lift flex items-center gap-3 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors no-underline"
+            class="hover-lift flex items-center gap-4 p-6 rounded-2xl border border-[#222] bg-[#121212] hover:border-white transition-all duration-300 no-underline group"
           >
-            <div class="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--color-accent-light)] flex items-center justify-center">
-              <IconGithub size={20} class="text-[var(--color-accent)]" />
+            <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-white transition-colors duration-300">
+              <IconGithub size={24} class="text-white/70 group-hover:text-[#0a0a0a] transition-colors" />
             </div>
-            <div>
-              <div class="text-sm font-medium text-[var(--color-text-primary)]">GitHub</div>
-              <div class="text-xs text-[var(--color-text-muted)]">Open Source</div>
+            <div class="flex-grow">
+              <div class="text-lg font-bold text-white">GitHub</div>
+              <div class="text-sm text-[var(--color-text-muted)] group-hover:text-white transition-colors">Open Source</div>
             </div>
+            <div class="text-white/70 transition-transform duration-300 group-hover:rotate-45">↗</div>
           </a>
 
           <a
             href="/cv"
-            class="hover-lift flex items-center gap-3 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] transition-colors no-underline"
+            class="hover-lift flex items-center gap-4 p-6 rounded-2xl border border-[#222] bg-[#121212] hover:border-[var(--color-accent)] transition-all duration-300 no-underline group"
           >
-            <div class="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--color-accent-light)] flex items-center justify-center">
-              <IconFileText size={20} class="text-[var(--color-accent)]" />
+            <div class="w-12 h-12 rounded-xl bg-[var(--color-accent)]/10 flex items-center justify-center group-hover:bg-[var(--color-accent)] transition-colors duration-300">
+              <IconFileText size={24} class="text-[var(--color-accent)] group-hover:text-[#0a0a0a] transition-colors" />
             </div>
-            <div>
-              <div class="text-sm font-medium text-[var(--color-text-primary)]">View CV</div>
-              <div class="text-xs text-[var(--color-text-muted)]">Preview & Download</div>
+            <div class="flex-grow">
+              <div class="text-lg font-bold text-white">View CV</div>
+              <div class="text-sm text-[var(--color-text-muted)] group-hover:text-white transition-colors">Preview & Download</div>
             </div>
+            <div class="text-[var(--color-accent)] transition-transform duration-300 group-hover:translate-x-1">→</div>
           </a>
         </div>
 
-        <div class="animate-on-scroll text-center p-8 rounded-[var(--radius-lg)] bg-[var(--color-surface)] border border-[var(--color-border)]">
-          <h2 class="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
+        <div class="animate-on-scroll text-center p-10 rounded-3xl bg-[#121212] border border-[#222] relative overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-br from-[var(--color-accent)]/5 to-transparent pointer-events-none"></div>
+          <h2 class="text-2xl font-black text-white mb-4 uppercase tracking-wide">
             {site.contactCta.heading}
           </h2>
-          <p class="text-[var(--color-text-secondary)] mb-6">
+          <p class="text-[var(--color-text-secondary)] mb-8 text-lg font-light max-w-xl mx-auto">
             {site.contactCta.body}
           </p>
-          <ButtonLink href={`mailto:${site.email}`} variant="primary">
-            <IconMail size={16} class="mr-2" />
+          <ButtonLink href={`mailto:${site.email}`} variant="primary" class="border border-[var(--color-accent)] bg-[var(--color-accent)] text-[#0a0a0a] hover:bg-transparent hover:text-[var(--color-accent)] text-lg px-8 py-3">
+            <IconMail size={20} class="mr-2" />
             {site.contactCta.emailLabel}
           </ButtonLink>
         </div>

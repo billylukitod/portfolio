@@ -21,91 +21,92 @@ const focusAreas = [
   {
     title: 'Robotics & Autonomy',
     description: 'ROS, Gazebo, SLAM, navigation, LiDAR, Ackermann systems. Building robust autonomous behaviors and simulation environments.',
-    icon: '🤖',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10 text-[var(--color-accent)] mb-2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>',
   },
   {
     title: 'Embedded & Electronics',
     description: 'STM32, ESP32, FreeRTOS, PCB design, sensors, debugging. Developing reliable firmware and hardware architectures.',
-    icon: '⚡',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10 text-[var(--color-accent)] mb-2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>',
   },
   {
     title: 'Control & Integration',
     description: 'Fuzzy logic, PSO, control systems, system integration, testing. Bridging algorithms and physical execution.',
-    icon: '🎛️',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10 text-[var(--color-accent)] mb-2"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>',
   },
 ];
 ---
 
 <BaseLayout title={site.seo.defaultTitle} description={site.description}>
-  <!-- 1. Hero -->
-  <section class="relative pt-[calc(var(--spacing-section)*1.5)] pb-[var(--spacing-section)] md:pt-[calc(var(--spacing-section)*2)] md:pb-[calc(var(--spacing-section)*1.5)] overflow-hidden">
-    <!-- Cinematic Full-width Background Image -->
-    <div class="absolute inset-0 z-0 animate-on-scroll">
+  <!-- 1. Hero Section -->
+  <section class="pt-[120px] pb-[var(--spacing-section)] md:pb-[calc(var(--spacing-section)*1.5)] px-4">
+    <div class="relative w-full min-h-[600px] md:min-h-[800px] rounded-2xl overflow-hidden flex items-center justify-center mx-auto max-w-7xl">
+      <!-- Background Image -->
       <img
-        src="/media/hero.jpg"
-        alt="Autonomous robotics and embedded systems electronics"
-        width="1920"
-        height="1080"
-        class="w-full h-full object-cover opacity-50 dark:opacity-30 scale-105"
+        src="/media/hero.png"
+        alt="Engineering background"
+        class="absolute inset-0 w-full h-full object-cover opacity-35"
         loading="eager"
       />
-      <!-- Gradients to blend image into the background seamlessly -->
-      <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-bg)] via-[var(--color-bg)]/80 to-transparent"></div>
-      <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-transparent to-[var(--color-bg)]/50"></div>
-      <!-- Decorative Tech Grid overlay -->
-      <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CgkJPGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz4KCTwvc3ZnPg==')] opacity-30"></div>
-    </div>
-    
-    <Container class="relative z-10">
-      <div class="max-w-3xl">
-        <div class="flex flex-col gap-6">
-          <div class="animate-hero-eyebrow flex items-center gap-2">
-            <span class="inline-block w-2 h-2 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent)]"></span>
-            <p class="text-[var(--color-accent)] font-mono text-sm tracking-widest uppercase font-bold">
-              {site.eyebrow}
-            </p>
-          </div>
-          <h1 class="animate-hero-heading font-display text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] text-[var(--color-text-primary)]">
-            {site.headline}
-          </h1>
-          <p class="animate-hero-summary text-xl md:text-2xl text-[var(--color-text-secondary)] max-w-2xl leading-relaxed">
-            {site.summary}
-          </p>
-          <div class="animate-hero-status flex items-center gap-2 mt-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--color-accent)] flex-shrink-0"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span class="text-sm md:text-base font-medium text-[var(--color-text-muted)]">{site.location} &middot; {site.availability}</span>
-          </div>
-          <div class="animate-hero-cta flex flex-wrap gap-4 mt-4">
-            <ButtonLink href={site.heroCtaPrimary.href} variant="primary" class="px-8 py-4 text-lg">
-              {site.heroCtaPrimary.label}
-              <IconArrowRight size={20} class="ml-2 inline" />
-            </ButtonLink>
-            <ButtonLink href={site.heroCtaSecondary.href} variant="secondary" class="px-8 py-4 text-lg backdrop-blur-sm bg-[var(--color-surface)]/50">
-              {site.heroCtaSecondary.label}
-            </ButtonLink>
-          </div>
-          <div class="animate-hero-social mt-6 flex items-center gap-4">
-            <span class="text-[var(--color-text-muted)] text-sm font-medium tracking-wide uppercase">Connect</span>
-            <div class="h-px w-8 bg-[var(--color-border)]"></div>
-            <SocialLinks />
-          </div>
+      <!-- Gradient Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/90 via-[#0a0a0a]/60 to-[#0a0a0a]/30 gradient-overlay"></div>
+      
+      <!-- Content Overlay -->
+      <div class="relative z-10 flex flex-col items-center text-center px-4 max-w-4xl mx-auto">
+        <!-- Eyebrow Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-sm border border-gray-700/50 mb-8 animate-hero-eyebrow">
+          <span class="inline-block w-2 h-2 rounded-full bg-[var(--color-accent)] pulse-dot"></span>
+          <span class="text-sm font-medium tracking-wide text-white uppercase">{site.eyebrow}</span>
+        </div>
+        
+        <!-- Heading -->
+        <h1 
+          class="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white mb-6 animate-hero-heading"
+          set:html={site.headline.replace(site.name, `<span class="text-[#F58A07]">${site.name}</span>`)}
+        >
+        </h1>
+        
+        <p class="text-xl md:text-2xl text-gray-300 max-w-2xl leading-relaxed mb-8 animate-hero-summary">
+          {site.summary}
+        </p>
+        
+        <div class="flex items-center justify-center gap-2 mb-10 text-gray-300 font-medium animate-hero-status">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#F58A07]"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>{site.location} &middot; {site.availability}</span>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row items-center gap-4 animate-hero-cta">
+          <a href={site.heroCtaPrimary.href} class="group inline-flex items-center gap-3 px-8 py-4 border-2 border-[#F58A07] text-white hover:bg-[#F58A07] hover:text-black transition-colors rounded-none font-bold text-lg">
+            {site.heroCtaPrimary.label}
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:rotate-45 transition-transform duration-300 arrow-hover"><line x1="5" y1="19" x2="19" y2="5"></line><polyline points="12 5 19 5 19 12"></polyline></svg>
+          </a>
+          <a href={site.heroCtaSecondary.href} class="group inline-flex items-center gap-3 px-8 py-4 border-2 border-gray-700 text-white hover:bg-gray-800 transition-colors rounded-none font-bold text-lg">
+            {site.heroCtaSecondary.label}
+          </a>
         </div>
       </div>
-    </Container>
+    </div>
   </section>
 
   <!-- 2. Engineering Focus -->
-  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)] bg-[var(--color-surface)]">
-    <Container>
-      <div class="animate-on-scroll">
-        <SectionHeading title="Engineering Focus" align="center" />
+  <section class="py-[var(--spacing-section)] bg-[var(--color-bg)] relative overflow-hidden">
+    <!-- Ambient glowing background like before -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--color-accent)]/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-[#084887]/20 blur-[100px] rounded-full pointer-events-none z-0"></div>
+    
+    <Container class="relative z-10">
+      <div class="animate-on-scroll flex flex-col items-center text-center mb-12">
+        <div class="flex items-center justify-center gap-4 section-divider">
+          <div class="h-1 w-12 bg-[#F58A07] bar"></div>
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-white">Engineering Focus</h2>
+          <div class="h-1 w-12 bg-[#F58A07] bar"></div>
+        </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 stagger-children">
-        {focusAreas.map((area) => (
-          <div class="hover-lift rounded-[var(--radius-lg)] p-8 border border-[var(--color-border)] bg-[var(--color-bg)] border-t-4 border-t-[var(--color-accent)]">
-            <span class="text-3xl mb-4 block" aria-hidden="true">{area.icon}</span>
-            <h3 class="text-xl font-bold text-[var(--color-text-primary)] mb-3">{area.title}</h3>
-            <p class="text-[var(--color-text-secondary)] leading-relaxed">{area.description}</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 stagger-children relative z-10">
+          {focusAreas.map((area) => (
+            <div class="hover-lift rounded-none p-8 bg-[var(--color-surface)] border border-gray-800 border-t-4 border-t-[#F58A07] transition-all relative z-10">
+              <div class="block" aria-hidden="true" set:html={area.icon} />
+            <h3 class="text-2xl font-bold text-white mb-3">{area.title}</h3>
+            <p class="text-gray-400 leading-relaxed">{area.description}</p>
           </div>
         ))}
       </div>
@@ -113,18 +114,19 @@ const focusAreas = [
   </section>
 
   <!-- 3. Featured Projects -->
-  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
+  <section class="py-[var(--spacing-section)] bg-[var(--color-surface)]">
     <Container>
-      <div class="animate-on-scroll flex justify-between items-end mb-10">
-        <SectionHeading title="Featured Projects" />
-        <a
-          href="/projects"
-          class="accent-underline text-[var(--color-accent)] font-medium hidden sm:flex items-center gap-1 group"
-        >
+      <div class="animate-on-scroll flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div class="flex items-center gap-4 section-divider">
+          <div class="h-1 w-12 bg-[#F58A07] bar"></div>
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-white">Featured Projects</h2>
+        </div>
+        <a href="/projects" class="group inline-flex items-center gap-2 text-[#F58A07] font-bold text-lg uppercase tracking-wider accent-underline">
           All Projects
-          <IconArrowRight size={16} class="group-hover:translate-x-1 transition-transform" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:rotate-45 transition-transform duration-300 arrow-hover"><line x1="5" y1="19" x2="19" y2="5"></line><polyline points="12 5 19 5 19 12"></polyline></svg>
         </a>
       </div>
+      
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
         {featuredProjects.map((project) => (
           <div class="hover-lift">
@@ -142,81 +144,90 @@ const focusAreas = [
           </div>
         ))}
       </div>
-      <div class="mt-8 text-center sm:hidden">
-        <ButtonLink href="/projects" variant="secondary">View All Projects</ButtonLink>
-      </div>
     </Container>
   </section>
 
   <!-- 4. About Preview -->
-  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)] bg-[var(--color-surface)]">
-    <Container>
-      <div class="relative rounded-[var(--radius-xl)] overflow-hidden bg-[var(--color-surface-elevated)] border border-[var(--color-border)] shadow-md animate-on-scroll hover-lift">
-        <div class="grid grid-cols-1 lg:grid-cols-12">
-          <!-- Image side -->
-          <div class="lg:col-span-5 relative min-h-[300px] lg:min-h-[400px] bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-accent-light)] overflow-hidden">
-            <!-- Decorative circuit lines -->
-            <svg class="absolute inset-0 w-full h-full text-[var(--color-accent)] opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <path d="M0 60 L20 60 L30 30 L50 30 L60 80 L80 80 L100 50" fill="none" stroke="currentColor" stroke-width="0.5" vector-effect="non-scaling-stroke"/>
-              <circle cx="20" cy="60" r="1.5" fill="currentColor"/>
-              <circle cx="50" cy="30" r="1.5" fill="currentColor"/>
-              <circle cx="80" cy="80" r="1.5" fill="currentColor"/>
-            </svg>
-            <img
-              src="/media/profile/photo.png"
-              alt={`${site.name} profile photo`}
-              width="1024"
-              height="876"
-              class="absolute inset-0 w-full h-full object-cover object-top"
-              loading="lazy"
-              style="-webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%); mask-image: linear-gradient(to right, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);"
-            />
-            <!-- Gradient fade for mobile screens -->
-            <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-surface-elevated)] via-[var(--color-surface-elevated)]/40 to-transparent lg:hidden pointer-events-none"></div>
+  <section class="py-[var(--spacing-section)] relative overflow-hidden bg-[var(--color-bg)] border-y border-gray-900/50">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="/media/about-action.jpg" 
+        alt="Working on drone" 
+        class="w-full h-full object-cover opacity-50 grayscale"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-[var(--color-bg)]/40 to-[var(--color-bg)]"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-bg)] via-transparent to-[var(--color-bg)]"></div>
+    </div>
+
+    <Container class="relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center animate-on-scroll">
+        <div class="relative group order-last lg:order-first max-w-md mx-auto lg:max-w-none">
+          <div class="absolute inset-0 border-4 border-[#084887] translate-x-4 translate-y-4 z-0 transition-transform duration-300 group-hover:translate-x-6 group-hover:translate-y-6"></div>
+          <img 
+            src="/media/profile/photo.png" 
+            alt={site.name} 
+            class="relative z-10 w-full h-auto object-cover border border-gray-800 img-hover-zoom bg-gray-900"
+          />
+        </div>
+        <div class="flex flex-col z-10">
+          <div class="flex items-center gap-4 mb-8 section-divider">
+            <div class="h-1 w-12 bg-[#F58A07] bar"></div>
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-white">About Me</h2>
           </div>
-          <!-- Content side -->
-          <div class="lg:col-span-7 flex flex-col justify-center p-8 lg:p-12 z-10 relative -mt-24 lg:mt-0 lg:-ml-6">
-            <h2 class="font-display text-3xl font-bold text-[var(--color-text-primary)] mb-6">About Me</h2>
-            <div class="text-[var(--color-text-secondary)] text-lg space-y-4 leading-relaxed relative z-10">
-              {site.aboutBio.map((paragraph) => (
-                <p>{paragraph}</p>
-              ))}
-            </div>
-            <div class="mt-8 relative z-10">
-              <ButtonLink href="/about" variant="primary">
-                More About Me
-                <IconArrowRight size={16} class="ml-2 inline" />
-              </ButtonLink>
-            </div>
+          <div class="text-gray-300 text-lg space-y-4 mb-10 leading-relaxed drop-shadow-md">
+            {site.aboutBio.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+          <div>
+            <a href="/about" class="group inline-flex items-center gap-3 px-8 py-4 border-2 border-[#084887] text-white hover:bg-[#084887] transition-colors rounded-none font-bold text-lg bg-[#0a0a0a]/50 backdrop-blur-sm">
+              More About Me
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:rotate-45 transition-transform duration-300 arrow-hover"><line x1="5" y1="19" x2="19" y2="5"></line><polyline points="12 5 19 5 19 12"></polyline></svg>
+            </a>
           </div>
         </div>
       </div>
     </Container>
   </section>
 
-  <!-- 5. Experience Preview -->
-  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
+  <!-- 5. Experience Section -->
+  <section class="py-[var(--spacing-section)] bg-[var(--color-surface)]">
     <Container>
-      <div class="animate-on-scroll">
-        <SectionHeading title="Experience" />
+      <div class="animate-on-scroll flex flex-col items-center text-center mb-16">
+        <div class="flex items-center justify-center gap-4 section-divider">
+          <div class="h-1 w-12 bg-[#F58A07] bar"></div>
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-white">Experience</h2>
+          <div class="h-1 w-12 bg-[#F58A07] bar"></div>
+        </div>
       </div>
-      <div class="mt-10 max-w-3xl">
-        <div class="relative border-l-2 border-[var(--color-border)] ml-3 md:ml-4 space-y-10 stagger-children">
+      
+      <div class="max-w-4xl mx-auto relative border-l-2 border-[#084887] ml-4 md:ml-auto md:border-l-0">
+        <!-- MD: Center line -->
+        <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-[#084887] -translate-x-1/2"></div>
+        
+        <div class="space-y-12 stagger-children">
           {experiences.slice(0, 3).map((exp, i) => (
-            <div class="relative pl-8 md:pl-10">
-              <div class={`absolute w-3 h-3 bg-[var(--color-accent)] rounded-full -left-[7px] top-2 ring-4 ring-[var(--color-bg)] ${i === 0 ? 'pulse-dot' : ''}`} />
-              <div class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-4 mb-1">
-                <h3 class="text-lg font-bold text-[var(--color-text-primary)]">{exp.role}</h3>
-                <span class="text-xs font-medium text-[var(--color-accent)] font-mono">
-                  {exp.period}
-                </span>
+            <div class="relative flex flex-col md:flex-row md:justify-between md:items-center w-full group pl-8 md:pl-0">
+              <!-- Dot -->
+              <div class={`absolute left-[-9px] md:left-1/2 md:-translate-x-1/2 top-0 md:top-1/2 md:-translate-y-1/2 w-4 h-4 rounded-full bg-[#F58A07] ring-4 ring-[var(--color-surface)] z-10 ${i === 0 ? 'pulse-dot' : ''}`}></div>
+              
+              <!-- Content Left/Right based on index -->
+              <div class={`md:w-5/12 ${i % 2 === 0 ? 'md:text-right md:pr-12' : 'md:order-last md:text-left md:pl-12'}`}>
+                <h3 class="text-2xl font-bold text-white mb-1 group-hover:text-[#F58A07] transition-colors">{exp.role}</h3>
+                <p class="text-lg text-gray-400 font-medium mb-4">{exp.organization}</p>
+                <div class="md:hidden text-[#F58A07] font-bold font-mono mb-4">{exp.period}</div>
+                <ul class={`text-gray-400 leading-relaxed list-disc list-outside space-y-2 ml-4 ${i % 2 === 0 ? 'md:ml-0 md:mr-4 md:list-none' : ''}`}>
+                  {exp.description.map((item) => (
+                    <li class={i % 2 === 0 ? 'md:text-right' : ''}>{item}</li>
+                  ))}
+                </ul>
               </div>
-              <p class="text-sm font-medium text-[var(--color-text-muted)] mb-2">{exp.organization}</p>
-              <ul class="text-[var(--color-text-secondary)] leading-relaxed list-disc list-outside ml-4 space-y-1">
-                {exp.description.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
+              
+              <!-- Date (Center-ish) -->
+              <div class={`hidden md:block md:w-5/12 ${i % 2 === 0 ? 'md:order-last md:text-left md:pl-12' : 'md:text-right md:pr-12'}`}>
+                <span class="text-[#F58A07] font-bold font-mono text-xl">{exp.period}</span>
+              </div>
             </div>
           ))}
         </div>
@@ -224,26 +235,27 @@ const focusAreas = [
     </Container>
   </section>
 
-
-  <!-- 7. Contact CTA -->
-  <section class="py-[var(--spacing-section)] bg-[var(--color-bg)] text-center">
+  <!-- 6. Contact CTA Section -->
+  <section class="py-[var(--spacing-section)] bg-[var(--color-bg)] border-t border-gray-900">
     <Container>
-      <div class="animate-on-scroll max-w-2xl mx-auto flex flex-col items-center">
-        <h2 class="font-display text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-6">
+      <div class="animate-on-scroll max-w-3xl mx-auto flex flex-col items-center text-center">
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-6">
           {site.contactCta.heading}
         </h2>
-        <p class="text-lg text-[var(--color-text-secondary)] mb-10 leading-relaxed">
+        <p class="text-xl text-gray-400 mb-12 leading-relaxed">
           {site.contactCta.body}
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <ButtonLink href={`mailto:${site.email}`} variant="primary">
-            <IconMail size={18} class="mr-2" />
+        <div class="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
+          <a href={`mailto:${site.email}`} class="group inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-[#F58A07] text-white hover:bg-[#F58A07] hover:text-black transition-colors rounded-none font-bold text-lg w-full sm:w-auto">
+            <IconMail size={20} class="mr-2" />
             {site.contactCta.emailLabel}
-          </ButtonLink>
-          <ButtonLink href={site.social.linkedin} variant="secondary" external>
-            <IconLinkedin size={18} class="mr-2" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:rotate-45 transition-transform duration-300 arrow-hover"><line x1="5" y1="19" x2="19" y2="5"></line><polyline points="12 5 19 5 19 12"></polyline></svg>
+          </a>
+          <a href={site.social.linkedin} target="_blank" rel="noopener noreferrer" class="group inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-[#084887] text-white hover:bg-[#084887] transition-colors rounded-none font-bold text-lg w-full sm:w-auto">
+            <IconLinkedin size={20} class="mr-2" />
             {site.contactCta.linkedinLabel}
-          </ButtonLink>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:rotate-45 transition-transform duration-300 arrow-hover"><line x1="5" y1="19" x2="19" y2="5"></line><polyline points="12 5 19 5 19 12"></polyline></svg>
+          </a>
         </div>
       </div>
     </Container>

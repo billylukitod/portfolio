@@ -12,26 +12,12 @@ import { achievements, education } from '../data/achievements';
 
 <BaseLayout title="About" description={`About ${site.name} — ${site.title}`}>
   <!-- Page header -->
-  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)] bg-[var(--color-surface)]">
+  <section class="pt-32 pb-[var(--spacing-section-sm)] md:pb-[var(--spacing-section)] bg-[#0a0a0a]">
     <Container>
       <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
         <div class="md:col-span-5 flex flex-col items-center animate-hero-image relative">
           <!-- Background glow and ornaments -->
-          <div class="absolute top-10 -left-8 w-32 h-32 bg-[var(--color-accent)] opacity-10 dark:opacity-20 rounded-full blur-2xl -z-10"></div>
-          <div class="absolute bottom-20 -right-4 w-40 h-40 bg-[var(--color-accent-light)] opacity-20 dark:opacity-10 rounded-full blur-3xl -z-10"></div>
-          
-          <svg class="absolute top-1/4 -right-6 text-[var(--color-accent)] opacity-40 w-12 h-12 -z-10 rotate-12" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4">
-            <rect x="20" y="20" width="60" height="60" rx="8" />
-            <circle cx="50" cy="50" r="10" />
-            <path d="M50 10 L50 20 M90 50 L80 50 M50 90 L50 80 M10 50 L20 50" stroke-linecap="round" />
-          </svg>
-          
-          <div class="absolute bottom-32 -left-4 flex gap-2 opacity-50 -z-10">
-            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-text-muted)]"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-text-muted)]"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-text-muted)]"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-text-muted)]"></span>
-          </div>
+          <div class="absolute top-10 -left-8 w-32 h-32 bg-[var(--color-accent)] opacity-20 rounded-full blur-2xl -z-10"></div>
           
           <div class="relative w-full max-w-sm mx-auto mb-4">
             <img
@@ -39,64 +25,95 @@ import { achievements, education } from '../data/achievements';
               alt={`${site.name} profile photo`}
               width="1024"
               height="876"
-              class="w-full h-auto object-cover object-top"
+              class="w-full h-auto object-cover object-top rounded-2xl border border-[var(--color-border)] shadow-xl"
               style="-webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%); mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);"
               loading="eager"
             />
           </div>
-          <div class="flex flex-col sm:flex-row gap-3 w-full max-w-sm animate-hero-cta z-10 relative">
-            <ButtonLink href="/projects" variant="primary" class="justify-center flex-1">View Projects</ButtonLink>
-            <ButtonLink href="/contact" variant="secondary" class="justify-center flex-1">Get in Touch</ButtonLink>
+          <div class="flex flex-col sm:flex-row gap-3 w-full max-w-sm animate-hero-cta z-10 relative mt-8">
+            <ButtonLink href="/projects" variant="primary" class="justify-center flex-1 border border-[var(--color-accent)] bg-transparent text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[#0a0a0a] group">
+              View Projects
+              <span class="inline-block transition-transform duration-300 group-hover:rotate-45 ml-2">↗</span>
+            </ButtonLink>
+            <ButtonLink href="/contact" variant="secondary" class="justify-center flex-1 border border-[var(--color-border)] hover:border-[var(--color-accent)] group">
+              Get in Touch
+              <span class="inline-block transition-transform duration-300 group-hover:rotate-45 ml-2">↗</span>
+            </ButtonLink>
           </div>
         </div>
 
         <div class="md:col-span-7 space-y-8 z-10 relative">
           <div class="animate-hero-eyebrow">
-            <h1 class="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-2 font-display">About Me</h1>
-            <p class="text-[var(--color-accent)] font-medium">{site.title}</p>
+            <h1 class="text-5xl md:text-6xl font-black text-white mb-4 font-display uppercase tracking-tight">
+              About <span class="text-[var(--color-accent)]">Me</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-[var(--color-text-secondary)] font-light border-l-4 border-[var(--color-accent)] pl-4 py-1">{site.title}</p>
           </div>
 
-          <div class="animate-hero-summary space-y-4 text-[var(--color-text-secondary)] leading-relaxed text-lg">
+          <div class="animate-hero-summary space-y-6 text-[var(--color-text-secondary)] leading-relaxed text-lg border-l-2 border-[#1a1a1a] pl-6">
             {site.aboutBio.map((paragraph) => (
               <p>{paragraph}</p>
             ))}
           </div>
 
-          <div class="animate-on-scroll">
-            <h2 class="text-xl font-semibold text-[var(--color-text-primary)] mb-3">Engineering Philosophy</h2>
-            <p class="text-[var(--color-text-secondary)] leading-relaxed">{site.aboutPhilosophy}</p>
-          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            <div class="animate-on-scroll bg-[#121212] p-6 rounded-2xl border border-[#222] hover-lift">
+              <h2 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                <span class="w-8 h-1 bg-[var(--color-accent)] inline-block"></span>
+                Philosophy
+              </h2>
+              <p class="text-[var(--color-text-secondary)] leading-relaxed">{site.aboutPhilosophy}</p>
+            </div>
 
-          <div class="animate-on-scroll">
-            <h2 class="text-xl font-semibold text-[var(--color-text-primary)] mb-3">Current Interests</h2>
-            <p class="text-[var(--color-text-secondary)] leading-relaxed">{site.aboutInterests}</p>
+            <div class="animate-on-scroll bg-[#121212] p-6 rounded-2xl border border-[#222] hover-lift">
+              <h2 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                <span class="w-8 h-1 bg-[var(--color-accent)] inline-block"></span>
+                Interests
+              </h2>
+              <p class="text-[var(--color-text-secondary)] leading-relaxed">{site.aboutInterests}</p>
+            </div>
           </div>
         </div>
       </div>
     </Container>
   </section>
 
-  <!-- Experience -->
-  <section id="experience" class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
+  <!-- Experience Timeline -->
+  <section id="experience" class="py-[var(--spacing-section)] bg-[#0a0a0a]">
     <Container>
-      <div class="animate-on-scroll">
-        <SectionHeading title="Experience" />
+      <div class="animate-on-scroll flex flex-col items-center mb-16">
+        <h2 class="text-4xl font-black font-display text-white uppercase tracking-wider">Experience</h2>
+        <div class="flex items-center gap-4 mt-4">
+          <div class="h-1 w-12 bg-[var(--color-accent)]"></div>
+          <div class="h-2 w-2 rounded-full bg-[var(--color-accent)]"></div>
+          <div class="h-1 w-12 bg-[var(--color-accent)]"></div>
+        </div>
       </div>
-      <div class="mt-10 max-w-3xl space-y-8 stagger-children">
-        {experiences.map((exp) => (
-          <div class="hover-lift flex flex-col md:flex-row gap-4 md:gap-8 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)]">
-            <div class="md:w-1/4 shrink-0">
-              <p class="text-sm text-[var(--color-text-muted)] font-mono">{exp.period}</p>
+      
+      <div class="relative max-w-4xl mx-auto stagger-children">
+        <!-- Central Timeline Line -->
+        <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-[#084887] transform md:-translate-x-1/2 rounded-full opacity-50"></div>
+        
+        {experiences.map((exp, index) => (
+          <div class={`relative flex flex-col md:flex-row items-center justify-between mb-12 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+            <!-- Timeline Dot -->
+            <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-[var(--color-accent)] transform -translate-x-[6px] md:-translate-x-1/2 pulse-dot z-10 border-4 border-[#0a0a0a]"></div>
+            
+            <div class="w-full md:w-[45%] pl-12 md:pl-0">
+              <div class="bg-[#121212] p-6 rounded-[var(--radius-lg)] border border-[#222] hover-lift text-left">
+                <span class="inline-block px-3 py-1 bg-[#084887]/20 text-[#084887] text-sm font-bold rounded-full mb-3 border border-[#084887]/30">
+                  {exp.period}
+                </span>
+                <h3 class="text-2xl font-bold text-white mb-1">{exp.role}</h3>
+                <p class="text-[var(--color-accent)] font-semibold mb-4 text-lg">{exp.organization}</p>
+                <ul class="text-[var(--color-text-secondary)] list-none space-y-2">
+                  {exp.description.map((item) => (
+                    <li class="leading-relaxed relative pl-4 before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-[var(--color-accent)] before:rounded-full">{item}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div class="md:w-3/4">
-              <h3 class="text-lg font-bold text-[var(--color-text-primary)]">{exp.role}</h3>
-              <p class="text-[var(--color-accent)] font-medium mb-2">{exp.organization}</p>
-              <ul class="text-[var(--color-text-secondary)] list-disc list-outside ml-4 space-y-2">
-                {exp.description.map((item) => (
-                  <li class="leading-relaxed">{item}</li>
-                ))}
-              </ul>
-            </div>
+            <div class="hidden md:block w-[45%]"></div>
           </div>
         ))}
       </div>
@@ -104,19 +121,24 @@ import { achievements, education } from '../data/achievements';
   </section>
 
   <!-- Education & Achievements -->
-  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)] bg-[var(--color-surface)]">
+  <section class="py-[var(--spacing-section)] bg-[#121212]">
     <Container>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
         <div class="animate-on-scroll">
-          <SectionHeading title="Education" />
-          <div class="mt-8 space-y-6">
+          <div class="flex items-center gap-4 mb-10">
+            <h2 class="text-3xl font-black font-display text-white uppercase">Education</h2>
+            <div class="h-1 flex-grow bg-gradient-to-r from-[var(--color-accent)] to-transparent"></div>
+          </div>
+          <div class="space-y-6">
             {education.map((edu) => (
-              <div class="hover-lift p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg)]">
-                <h3 class="text-lg font-bold text-[var(--color-text-primary)]">{edu.degree}</h3>
-                <p class="text-[var(--color-accent)] font-medium">{edu.institution}</p>
-                <p class="text-sm text-[var(--color-text-muted)] font-mono mt-1">{edu.period}</p>
+              <div class="hover-lift p-6 rounded-[var(--radius-lg)] border-l-4 border-l-[#084887] border-y border-r border-y-[#222] border-r-[#222] bg-[#0a0a0a]">
+                <div class="flex justify-between items-start flex-wrap gap-2 mb-2">
+                  <h3 class="text-xl font-bold text-white">{edu.degree}</h3>
+                  <span class="text-sm font-mono text-[var(--color-text-muted)] bg-[#1a1a1a] px-2 py-1 rounded">{edu.period}</span>
+                </div>
+                <p class="text-[var(--color-accent)] font-medium text-lg">{edu.institution}</p>
                 {edu.description && (
-                  <p class="text-[var(--color-text-secondary)] mt-2 text-sm">{edu.description}</p>
+                  <p class="text-[var(--color-text-secondary)] mt-3">{edu.description}</p>
                 )}
               </div>
             ))}
@@ -124,24 +146,35 @@ import { achievements, education } from '../data/achievements';
         </div>
 
         <div class="animate-on-scroll">
-          <SectionHeading title="Achievements" />
-          <div class="mt-8 space-y-6">
+          <div class="flex items-center gap-4 mb-10">
+            <h2 class="text-3xl font-black font-display text-white uppercase">Hall of Fame</h2>
+            <div class="h-1 flex-grow bg-gradient-to-r from-[var(--color-accent)] to-transparent"></div>
+          </div>
+          <div class="space-y-6 relative border-l-2 border-[#222] pl-8">
             {achievements.map((achievement) => (
-              <div class="hover-lift p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg)]">
-                <h3 class="text-lg font-bold text-[var(--color-text-primary)]">{achievement.title}</h3>
+              <div class="relative hover-lift p-6 rounded-[var(--radius-lg)] border border-[#222] bg-[#0a0a0a] overflow-hidden group">
+                <div class="absolute top-6 -left-[33px] w-4 h-4 bg-[#0a0a0a] border-2 border-[var(--color-accent)] rounded-full z-10"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-[var(--color-accent)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-lg font-bold text-white pr-4">{achievement.title}</h3>
+                  <span class="shrink-0 inline-block px-2 py-1 bg-[var(--color-accent)]/10 text-[var(--color-accent)] text-xs font-bold rounded">
+                    {achievement.year}
+                  </span>
+                </div>
                 {achievement.event && (
-                  <p class="text-[var(--color-accent)] font-medium">{achievement.event}</p>
+                  <p class="text-[#084887] font-semibold mb-3 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+                    {achievement.event}
+                  </p>
                 )}
-                <p class="text-sm text-[var(--color-text-muted)] font-mono mt-1">{achievement.year}</p>
-                <p class="text-[var(--color-text-secondary)] mt-2 text-sm">{achievement.description}</p>
+                <p class="text-[var(--color-text-secondary)] text-sm mb-4">{achievement.description}</p>
+                
                 {achievement.certificateUrl && (
-                  <div class="mt-4">
-                    <a href={achievement.certificateUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full bg-[var(--color-surface-elevated)] border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)]/30 hover:bg-[var(--color-accent)]/5 transition-all shadow-sm">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
-                        <path d="m9 12 2 2 4-4"/>
-                      </svg>
+                  <div>
+                    <a href={achievement.certificateUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded bg-transparent border border-[#333] text-white hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-all group/btn">
                       View Certificate
+                      <span class="inline-block transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
                     </a>
                   </div>
                 )}
@@ -154,22 +187,28 @@ import { achievements, education } from '../data/achievements';
   </section>
 
   <!-- Skills -->
-  <section class="py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]">
+  <section class="py-[var(--spacing-section)] bg-[#0a0a0a]">
     <Container>
-      <div class="animate-on-scroll">
-        <SectionHeading title="Skills & Tools" />
+      <div class="animate-on-scroll flex flex-col items-center mb-16">
+        <h2 class="text-4xl font-black font-display text-white uppercase tracking-wider">Skills & Tools</h2>
+        <div class="flex items-center gap-4 mt-4">
+          <div class="h-1 w-12 bg-[var(--color-accent)]"></div>
+          <div class="h-2 w-2 rounded-full bg-[var(--color-accent)]"></div>
+          <div class="h-1 w-12 bg-[var(--color-accent)]"></div>
+        </div>
       </div>
 
       {/* Core */}
       <div class="mt-10 animate-on-scroll">
-        <div class="flex items-center gap-3 mb-5">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-[var(--color-accent)]/10 text-[var(--color-accent)] border border-[var(--color-accent)]/20">Core</span>
-          <span class="text-sm text-[var(--color-text-muted)]">Technologies I've built multiple projects with</span>
+        <div class="flex items-center gap-4 mb-8">
+          <h3 class="text-2xl font-bold text-white uppercase tracking-wide">Core</h3>
+          <div class="h-[1px] flex-grow bg-gradient-to-r from-[var(--color-accent)]/50 to-transparent"></div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
           {skillGroups.filter(g => g.level === 'core').map((group) => (
-            <div class="hover-lift p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)]">
-              <h3 class="text-lg font-semibold text-[var(--color-text-primary)] mb-4">{group.category}</h3>
+            <div class="hover-lift p-6 rounded-[var(--radius-lg)] border border-[#222] bg-[#121212] relative overflow-hidden group">
+              <div class="absolute left-0 top-0 bottom-0 w-1 bg-[var(--color-accent)] transform origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
+              <h3 class="text-xl font-bold text-white mb-4">{group.category}</h3>
               <TechnologyTags technologies={group.skills} />
             </div>
           ))}
@@ -177,15 +216,16 @@ import { achievements, education } from '../data/achievements';
       </div>
 
       {/* Working Knowledge */}
-      <div class="mt-10 animate-on-scroll">
-        <div class="flex items-center gap-3 mb-5">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-blue-500/10 text-blue-500 border border-blue-500/20">Working Knowledge</span>
-          <span class="text-sm text-[var(--color-text-muted)]">Used meaningfully in specific projects</span>
+      <div class="mt-16 animate-on-scroll">
+        <div class="flex items-center gap-4 mb-8">
+          <h3 class="text-2xl font-bold text-white uppercase tracking-wide">Working Knowledge</h3>
+          <div class="h-[1px] flex-grow bg-gradient-to-r from-[#084887]/50 to-transparent"></div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
           {skillGroups.filter(g => g.level === 'working').map((group) => (
-            <div class="hover-lift p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)]">
-              <h3 class="text-lg font-semibold text-[var(--color-text-primary)] mb-4">{group.category}</h3>
+            <div class="hover-lift p-6 rounded-[var(--radius-lg)] border border-[#222] bg-[#121212] relative overflow-hidden group">
+              <div class="absolute left-0 top-0 bottom-0 w-1 bg-[#084887] transform origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
+              <h3 class="text-xl font-bold text-white mb-4">{group.category}</h3>
               <TechnologyTags technologies={group.skills} />
             </div>
           ))}
@@ -193,15 +233,16 @@ import { achievements, education } from '../data/achievements';
       </div>
 
       {/* Familiar */}
-      <div class="mt-10 animate-on-scroll">
-        <div class="flex items-center gap-3 mb-5">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20">Familiar</span>
-          <span class="text-sm text-[var(--color-text-muted)]">Currently exploring and building proficiency</span>
+      <div class="mt-16 animate-on-scroll">
+        <div class="flex items-center gap-4 mb-8">
+          <h3 class="text-2xl font-bold text-white uppercase tracking-wide">Familiar</h3>
+          <div class="h-[1px] flex-grow bg-gradient-to-r from-[#333] to-transparent"></div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
           {skillGroups.filter(g => g.level === 'familiar').map((group) => (
-            <div class="hover-lift p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)]">
-              <h3 class="text-lg font-semibold text-[var(--color-text-primary)] mb-4">{group.category}</h3>
+            <div class="hover-lift p-6 rounded-[var(--radius-lg)] border border-[#222] bg-[#121212] relative overflow-hidden group">
+              <div class="absolute left-0 top-0 bottom-0 w-1 bg-[#555] transform origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
+              <h3 class="text-xl font-bold text-white mb-4">{group.category}</h3>
               <TechnologyTags technologies={group.skills} />
             </div>
           ))}
@@ -211,16 +252,22 @@ import { achievements, education } from '../data/achievements';
   </section>
 
   <!-- CTA -->
-  <section class="py-[var(--spacing-section)] bg-[var(--color-surface)] text-center">
+  <section class="py-24 bg-[#121212] text-center border-t border-[#222]">
     <Container>
-      <div class="animate-on-scroll max-w-xl mx-auto">
-        <h2 class="font-display text-2xl font-bold text-[var(--color-text-primary)] mb-4">Want to work together?</h2>
-        <p class="text-[var(--color-text-secondary)] mb-8">
+      <div class="animate-on-scroll max-w-2xl mx-auto">
+        <h2 class="font-display text-4xl font-black text-white mb-6 uppercase tracking-tight">Want to work together?</h2>
+        <p class="text-[var(--color-text-secondary)] text-lg mb-10">
           Check out my projects or get in touch to discuss engineering roles, research, and collaboration.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <ButtonLink href="/projects" variant="primary">View Projects</ButtonLink>
-          <ButtonLink href="/contact" variant="secondary">Contact Me</ButtonLink>
+          <ButtonLink href="/projects" variant="primary" class="border border-[var(--color-accent)] bg-transparent text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[#0a0a0a] group">
+            View Projects
+            <span class="inline-block transition-transform duration-300 group-hover:rotate-45 ml-2">↗</span>
+          </ButtonLink>
+          <ButtonLink href="/contact" variant="secondary" class="border border-[#333] hover:border-[var(--color-accent)] text-white group">
+            Contact Me
+            <span class="inline-block transition-transform duration-300 group-hover:rotate-45 ml-2">↗</span>
+          </ButtonLink>
         </div>
       </div>
     </Container>
