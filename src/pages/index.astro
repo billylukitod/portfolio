@@ -217,9 +217,12 @@ const focusAreas = [
                 <h3 class="text-2xl font-bold text-white mb-1 group-hover:text-[#F58A07] transition-colors">{exp.role}</h3>
                 <p class="text-lg text-gray-400 font-medium mb-4">{exp.organization}</p>
                 <div class="md:hidden text-[#F58A07] font-bold font-mono mb-4">{exp.period}</div>
-                <ul class={`text-gray-400 leading-relaxed list-disc list-outside space-y-2 ml-4 ${i % 2 === 0 ? 'md:ml-0 md:mr-4 md:list-none' : ''}`}>
+                <ul class="text-gray-400 leading-relaxed space-y-3 mt-4">
                   {exp.description.map((item) => (
-                    <li class={i % 2 === 0 ? 'md:text-right' : ''}>{item}</li>
+                    <li class={`flex items-start gap-3 ${i % 2 === 0 ? 'md:flex-row-reverse md:text-right text-left' : 'text-left'}`}>
+                      <span class="text-[#F58A07] mt-1.5 flex-shrink-0 text-xs">●</span>
+                      <span>{item}</span>
+                    </li>
                   ))}
                 </ul>
               </div>
